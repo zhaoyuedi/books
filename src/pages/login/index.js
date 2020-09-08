@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Form, Icon, Input, Button, message } from "antd";
 import { LoginWrapper } from "./styled";
 import connect from "./connect";
+import Cookies from "js-cookie";
 
 @connect
 @Form.create()
@@ -28,6 +29,7 @@ class Login extends Component {
       //     message.info(`${data.data.info.msg}`);
       //   }
       // }
+      Cookies.set('token',1111)
       this.props.history.push("/home")
     });
   };
