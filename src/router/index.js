@@ -17,7 +17,7 @@ export const layoutRoute =[
             {
                 key:"/books/booksList",
                 path:"/books/booksList",
-                name:"书籍列表",
+                name:"书籍排行",
                 component:BooksList,
                 icon:"bars"
             },

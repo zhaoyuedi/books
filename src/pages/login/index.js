@@ -3,6 +3,7 @@ import { Form, Icon, Input, Button, message } from "antd";
 import { LoginWrapper } from "./styled";
 import connect from "./connect";
 import Cookies from "js-cookie";
+// import { List } from "@api";
 
 @connect
 @Form.create()
@@ -12,6 +13,11 @@ class Login extends Component {
     this.state = {
       flag: true
     };
+  }
+  componentDidMount(){
+    // List().then(res=>{
+    //   console.log(res)
+    // })
   }
   handleSubmit = e => {
     e.preventDefault();

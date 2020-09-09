@@ -81,7 +81,7 @@ class LayoutComponent extends Component {
                     style={{ display: "flex" }}
                   >
                     <div style={{ marginRight: "10px", color: "#001529" }}>
-                      你好,{this.props.userName}
+                      {/* 你好,{this.props.userName} */}
                     </div>
                     <div style={{ marginRight: "120px" }}>  <Avatar src={this.props.userPic} /></div>
                     <Dropdown.Button overlay={menu} icon={<Icon type="user" />}>

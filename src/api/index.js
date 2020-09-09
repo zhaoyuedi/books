@@ -37,3 +37,4 @@ export const modifyUserPicApi = (formdata)=>{
            body:formdata
          }).then(res=>res.json())
    }
+export const BooksList = (params)=>http.get('/api/statis/',params)
