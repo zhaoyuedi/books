@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table,Tooltip } from 'antd';
 import _ from 'lodash'
+import { TableWarp } from "./styled";
 
 class BaseTable extends React.Component {
   constructor(props) {
@@ -79,33 +80,33 @@ class BaseTable extends React.Component {
     // const { pagination, className, style, scrollX,columns, ...rest } = this.props;
     const { pagination, className, style, scrollX,wrapStyle,newStyleLess,
       columns,components={}, ...rest } = this.props;
-    const BASE_PAGINATION = {
-      defaultCurrent: 1,
-      defaultPageSize: 10,
-      showQuickJumper: true,
-      showSizeChanger: true,
-      size: 'small',
-      pageSizeOptions: ['1', '5', '10', '20', '50', '100'],
-      // simple: true,
-      showTotal: () => {
-        // 
-        const {
-          current
-        } = pagination
-        return (
-          <span>
-            {`共${current}条记录`}
-          </span>
-        );
-      },
-    };
-    const allPagination = pagination
-      ? { ...BASE_PAGINATION, ...pagination }
-      : false;
-    if(allPagination.total === 0){
-      allPagination.total = 1;
-      allPagination.pages = 0;
-    }
+    // const BASE_PAGINATION = {
+    //   defaultCurrent: 1,
+    //   defaultPageSize: 10,
+    //   showQuickJumper: true,
+    //   showSizeChanger: true,
+    //   size: 'small',
+    //   pageSizeOptions: ['1', '5', '10', '20', '50', '100'],
+    //   // simple: true,
+    //   showTotal: () => {
+    //     // 
+    //     const {
+    //       count
+    //     } = pagination
+    //     return (
+    //       <span>
+    //         {`共${count}条记录`}
+    //       </span>
+    //     );
+    //   },
+    // };
+    // const allPagination = pagination
+    //   ? { ...BASE_PAGINATION, ...pagination }
+    //   : false;
+    // if(allPagination.total === 0){
+    //   allPagination.total = 1;
+    //   allPagination.pages = 0;
+    // }
     let expandFlag=this.props.expandedRowKeys && _.isEmpty(this.props.expandedRowKeys)
     const COLUMNS=_.map(_.cloneDeep(columns),item=>{
       let {required,title}=item
@@ -137,13 +138,14 @@ class BaseTable extends React.Component {
     // rowSelection:{...this.props.rowSelection,...this.state.rowSelection},
     rowSelection:{...this.state.rowSelection,...this.props.rowSelection},
     scroll:scrollX ? { ...this.state.tableH, ...scrollX } : this.state.tableH,
-    pagination:allPagination,
+    pagination,
     className
    }
     if(!expandFlag){
       tableProps.components=components
     }
     return (
+      <TableWarp>
       <div className={`${'tableBoxAdmin'} ${newStyleLess?'styleLess':''}`} ref="tableBoxAdmin" style={wrapStyle?{
         paddingTop:20,
         borderRadius:4,
@@ -153,6 +155,7 @@ class BaseTable extends React.Component {
             // rowSelection={{...this.state.rowSelection,...this.props.rowSelection}}
           />
       </div>
+      </TableWarp>
     );
   }
 }

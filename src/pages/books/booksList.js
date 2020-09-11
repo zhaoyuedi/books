@@ -1,10 +1,6 @@
-// import React, { Component, Fragment } from 'react'
-// import { Table, Divider, Button, Modal, Form, Input, Select, Row, Col } from 'antd';
-// import { booksListApi } from '@api'
-// import FormInfo from '@common/Form';
-
 import React, { Component } from 'react'
 import { BooksList } from "@api";
+import { Rate,Tag } from 'antd';
 import Table from '@components/Table';
 
 
@@ -58,64 +54,35 @@ class BooksListWarp extends Component {
         title: '图片',
         dataIndex: 'img_info',
         key: 'img_info',
-        render: text=><img src={`http://img.zhishu.online/${text.key}`} style={{width:100,height:100}}/>,
+        render: text=><img src={`http://img.zhishu.online/${text.key}`} style={{width:70,height:100}}/>,
         width: 120,
         ellipsis: true,
       },
       {
-        title: '级别',
-        dataIndex: 'level',
-        key: 'level',
-        render: text => text || '-',
-        width: 80,
+        title: '豆瓣评分',
+        dataIndex: 'value',
+        key: 'value',
+        render: (text,record) => <Rate allowHalf value={record.rating.value/2} disabled/> || '-',
+        width: 100,
         ellipsis: true,
       },
       {
-        title: '菜单类型',
+        title: '类型',
         dataIndex: 'type',
         key: 'type',
+        render: (text,record) => record.tags.map(v=><Tag color="blue">{v.name}</Tag>) || '-',
         width: 100,
         ellipsis: true,
-      },
-      {
-        title: '菜单编码',
-        dataIndex: 'code',
-        key: 'code',
-        width: 120,
-        ellipsis: true,
-      },
-      {
-        title: 'URL',
-        dataIndex: 'url',
-        key: 'url',
-        width: 150,
-        ellipsis: true,
-      },
-      {
-        title: '排序号',
-        dataIndex: 'sort',
-        key: 'sort',
-        render: text => text || '-',
-        width: 100,
-        ellipsis: true,
-      },
-      {
-        title: '状态',
-        dataIndex: 'status',
-        key: 'status',
-        width: 80,
-        ellipsis: true,
-      },
-      {
-        title: '',
-        dataIndex: 'null',
-        key: 'null',
-        ellipsis: true,
-    },
+      }
     ];
   }
+  handleTableChange = (page) => {
+    console.log(1)
+    this.updateTable(page);
+  };
   render() {
     const {table} = this.state
+    console.log(table)
     return (
       <div>
         <Table
@@ -125,9 +92,10 @@ class BooksListWarp extends Component {
             // loading={loading}
             dataSource={table.dataSource}
             pagination={{
-              current: table.current
+              total: table.count,
+              onChange: this.handleTableChange,
             }}
-            scrollX={{ x:1520  }}
+            scrollX={{ x:1420  }}
           />
       </div>
     )
