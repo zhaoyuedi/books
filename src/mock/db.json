@@ -1,0 +1,20 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "userId": "zyd",
+      "password": "584521",
+      "name": "赵曰迪",
+      "age": 22,
+      "grade": "研二"
+    },
+    {
+      "userId": "zyd2",
+      "password": "5845212",
+      "userName": "2",
+      "age": "2",
+      "grade": "2",
+      "id": "5"
+    }
+  ]
+}
