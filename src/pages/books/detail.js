@@ -1,26 +1,43 @@
 import React, { Component } from 'react'
 import { Table,Form, Input,Row,Col, Select,Icon, Button, message } from 'antd';
-import { addBook } from "@api";
+import { withRouter } from 'react-router-dom';
+import { BooksList,modificationHandler } from "@api";
 const FormItem = Form.Item;
 
+@withRouter
 @Form.create()
-class AddBooks extends Component {
+class Detail extends Component {
+    constructor(){
+        super()
+        this.state = {
+            formData:{}
+        }
+    }
+ async componentDidMount(){
+    const data = await BooksList(this.props.match.params)
+    this.setState({
+        formData:data[0]
+    })
+    console.log(data)
+  }
   onSubmit = ()=>{
     this.props.form.validateFields(async(err,value)=>{
       if(err){
         return
       }
-      addBook(value).then(()=>{
-        message.success('添加成功')
+      modificationHandler(this.props.match.params.id,value).then(()=>{
+        message.success('修改成功')
       })
     })
   }
   setConfigItems = ()=>{
+      const {formData} = this.state
     return [
       {
         label:"图书编码",
         value:"code",
         options:{
+          initialValue:formData.code,
           rules: [
             {
               required: true,
@@ -36,6 +53,7 @@ class AddBooks extends Component {
         label:"图书名称",
         value:"bookName",
         options:{
+          initialValue:formData.bookName,
           rules: [
             {
               required: true,
@@ -51,6 +69,7 @@ class AddBooks extends Component {
         label:"图书作者",
         value:"author",
         options:{
+          initialValue:formData.author,
           rules: [
             {
               required: true,
@@ -66,6 +85,7 @@ class AddBooks extends Component {
         label:"图书价格",
         value:"price",
         options:{
+          initialValue:formData.price,
           rules: [
             {
               required: true,
@@ -85,6 +105,7 @@ class AddBooks extends Component {
         label:"图书类型",
         value:"type",
         options:{
+          initialValue:formData.type,
           rules: [
             {
               required: true,
@@ -100,6 +121,7 @@ class AddBooks extends Component {
         label:"图书出版社",
         value:"press",
         options:{
+          initialValue:formData.press,
           rules: [
             {
               required: true,
@@ -115,6 +137,7 @@ class AddBooks extends Component {
         label:"图书总数",
         value:"amount",
         options:{
+          initialValue:formData.amount,
           rules: [
             {
               required: true,
@@ -134,6 +157,7 @@ class AddBooks extends Component {
         label:"图书描述",
         value:"describe",
         options:{
+          initialValue:formData.describe,
           rules: [
             {
               required: true,
@@ -179,4 +203,4 @@ class AddBooks extends Component {
   }
 }
 
-export default AddBooks
+export default Detail

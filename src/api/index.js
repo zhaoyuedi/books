@@ -40,10 +40,11 @@ export const modifyUserPicApi = (formdata)=>{
 export const BooksList = (params)=>http.get('http://localhost:3000/bookList',params)
 export const addBook = (data)=>http.post('http://localhost:3000/bookList',{
     ...data,
-    //id:Math.ceil(Math.random()*1000000000%9)
 })
 export const getUser = (params)=>http.get('http://localhost:3000/user',params)
 export const registerHandelr = (data)=>http.post('http://localhost:3000/user',{
     ...data,
     id:Math.ceil(Math.random()*1000000000%9)
 })
+export const modificationHandler = (id,data)=>http.put(`http://localhost:3000/bookList/${id}`,data)
+export const deleteHandler = (id,data)=>http.Delete(`http://localhost:3000/bookList/${id}`,data)

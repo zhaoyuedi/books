@@ -22,15 +22,15 @@
       "describe": "大神养成记"
     },
     {
-      "id": "2",
       "code": "2",
       "bookName": "电子技术",
-      "author": "马教授",
+      "author": "李教授",
       "price": "22",
       "type": "IT",
       "press": "科学出版社",
-      "amount": 52,
-      "describe": "大神养成记"
+      "amount": "58",
+      "describe": "大神养成记",
+      "id": "2"
     },
     {
       "id": "3",
@@ -130,50 +130,6 @@
       "press": "科学出版社",
       "amount": 52,
       "describe": "大神养成记"
-    },
-    {
-      "id": "12",
-      "code": "12",
-      "bookName": "工程",
-      "author": "马教授",
-      "price": "46",
-      "type": "IT",
-      "press": "科学出版社",
-      "amount": 52,
-      "describe": "大神养成记"
-    },
-    {
-      "id": "13",
-      "code": "13",
-      "bookName": "人工智能",
-      "author": "马教授",
-      "price": "49",
-      "type": "IT",
-      "press": "科学出版社",
-      "amount": 52,
-      "describe": "大神养成记"
-    },
-    {
-      "code": "14",
-      "bookName": "大学英语",
-      "author": "赵教授",
-      "price": "24",
-      "type": "文学",
-      "press": "清华出版社",
-      "amount": "66",
-      "describe": "一起来学习英语吧",
-      "id": "4wIsm8g"
-    },
-    {
-      "code": "145",
-      "bookName": "大学英语2",
-      "author": "赵教授",
-      "price": "29",
-      "type": "文学",
-      "press": "清华出版社",
-      "amount": "60",
-      "describe": "一起来学习英语吧",
-      "id": "s-qb9PS"
     }
   ]
 }

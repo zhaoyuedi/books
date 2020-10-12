@@ -38,9 +38,36 @@ const post = (url, data) => {
 
     return result;
 }
+const put = (url, data) => {
+    var result = fetchPro(url, {
+        method: "put",
+        credentials: "include",
+        headers: {
+            "content-type": "application/x-www-form-urlencoded"
+        },
+        body: qs.stringify(data)
+    }).then(res=>res.json())
 
+
+    return result;
+}
+const Delete = (url, data) => {
+    var result = fetchPro(url, {
+        method: "delete",
+        credentials: "include",
+        headers: {
+            "content-type": "application/x-www-form-urlencoded"
+        },
+        body: qs.stringify(data)
+    }).then(res=>res.json())
+
+
+    return result;
+}
 
 export default {
     get,
-    post
+    post,
+    put,
+    Delete
 }

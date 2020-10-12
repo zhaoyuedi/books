@@ -1,4 +1,4 @@
-import {Home,UserList,AddBooks,BooksList,UserInfo,Login} from '@pages'
+import {Home,UserList,AddBooks,BooksList,UserInfo,Login,BookDetail} from '@pages'
 
 export const layoutRoute =[
     {
@@ -46,12 +46,18 @@ export const layoutRoute =[
         ]
     },
 ]
-export const addBook = [
+export const page = [
     {
         key:"/addBook",
         path:"/addBook",
         component:AddBooks,
         name:"新增图书"
+    },
+    {
+        key:"/book/detail",
+        path:"/book/detail/:id",
+        component:BookDetail,
+        name:"图书详情"
     }
 ]
 export const login = [
@@ -64,4 +70,4 @@ export const login = [
     }
 ]
 
-export const baseconfigRouters = layoutRoute.concat(login).concat(addBook)
+export const baseconfigRouters = layoutRoute.concat(login).concat(page)

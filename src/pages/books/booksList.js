@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { BooksList } from "@api";
+import { BooksList,deleteHandler } from "@api";
 import { withRouter } from 'react-router-dom';
-import { Table,Form, Input,Row,Col, Select,Icon, Button } from 'antd';
+import { Table,Form, Input,Row,Col, Select,Icon, Button ,Modal,message} from 'antd';
+import { TableWarp } from "./styled";
 
 
 const FormItem = Form.Item;
 const { Option } = Select;
+const {confirm} = Modal
 
 @withRouter
 @Form.create()
@@ -33,10 +35,29 @@ class BooksListWarp extends Component {
         this.setState({
           table:{
             dataSource:res,
-            count:count.length
+            count:count.length,
+            current:_page
           }
         })
     })
+  }
+  modificationHandler = (record)=>{
+    this.props.history.push(`/book/detail/${record.id}`)
+  }
+  deleteHandler = (record)=>{
+    const {table:{current}} = this.state
+    confirm({
+      title: '警告',
+      content: '确定是否删除',
+      okText:"确认",
+      cancelText:"取消",
+      onOk:()=>{
+        deleteHandler(record.id).then(v=>{
+          this.updateTable(current)
+          message.success('删除成功')
+        })
+      },
+    });
   }
   setColumns = ()=>{
     return [
@@ -92,19 +113,19 @@ class BooksListWarp extends Component {
         width: 100,
         title: '修改',
         key: 'modification',
-        render: () => <span>修改</span>,
+        render: (text,record) => <span className='fixedSpan' onClick={()=>this.modificationHandler(record)}>修改</span>,
         fixed: 'right',
       },
       {
         width: 100,
         title: '删除',
         key: 'delete',
-        render: () => <span>删除</span>,
+        render: (text,record) => <span className='fixedSpan' onClick={()=>this.deleteHandler(record)}>删除</span>,
         fixed: 'right',
       }
     ];
   }
-  handleTableChange = (page) => {
+  handleTableChange = (page, pageSize) => {
     this.updateTable(page);
   };
   onSubmit = ()=>{
@@ -167,7 +188,7 @@ class BooksListWarp extends Component {
       },
     ]
     return (
-      <div>
+      <TableWarp>
         <Form labelAlign='left'>
           <Row>
             <Col span={6} >
@@ -228,10 +249,11 @@ class BooksListWarp extends Component {
               total: table.count,
               pageSize:5,
               onChange: this.handleTableChange,
+              current:table.current
             }}
             scroll={{ x:1500  }}
           />
-      </div>
+      </TableWarp>
     )
   }
 }

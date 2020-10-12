@@ -25,3 +25,7 @@ export const UserList = ReactLoad({
     loader:()=>import('./user/userList'),
     loading:Loading
 })
+export const BookDetail = ReactLoad({
+    loader:()=>import('./books/detail'),
+    loading:Loading
+})
