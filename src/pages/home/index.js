@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Trgeniusr from "../../components/Trgeniusr";
+import SearchCriteria from "../../components/SearchCriteria";
 import { Input, Select, DatePicker ,Checkbox} from "antd";
 
 const { Option } = Select;
@@ -117,7 +117,7 @@ class index extends Component {
   }
   render() {
     return <div>
-      <Trgeniusr  
+      <SearchCriteria  
       formItems={this.renderTrgeniusrFormItem()}
       onSubmit={this.handleTableSearchEvent}
       />

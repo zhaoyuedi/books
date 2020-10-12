@@ -37,7 +37,11 @@ export const modifyUserPicApi = (formdata)=>{
            body:formdata
          }).then(res=>res.json())
    }
-export const BooksList = (params)=>http.get('/api/statis/',params)
+export const BooksList = (params)=>http.get('http://localhost:3000/bookList',params)
+export const addBook = (data)=>http.post('http://localhost:3000/bookList',{
+    ...data,
+    //id:Math.ceil(Math.random()*1000000000%9)
+})
 export const getUser = (params)=>http.get('http://localhost:3000/user',params)
 export const registerHandelr = (data)=>http.post('http://localhost:3000/user',{
     ...data,

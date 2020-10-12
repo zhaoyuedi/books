@@ -1,56 +1,182 @@
-import E from "wangeditor"; // 引用
-import React, { Component } from "react";
-import {UpdateUserPic} from '@api';
+import React, { Component } from 'react'
+import { Table,Form, Input,Row,Col, Select,Icon, Button, message } from 'antd';
+import { addBook } from "@api";
+const FormItem = Form.Item;
 
+@Form.create()
 class AddBooks extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      content: ""
-    };
-  }
-  componentDidMount() {
-    const elem = this.refs.editorElem; //获取editorElem盒子
-    const submit = this.refs.submit; //获取提交按钮
-    this.editor = new E(elem); //new 一个 editorElem富文本
-
-
-    this.editor.customConfig.uploadFileName = "userPic"; //置上传接口的文本流字段
-
-    this.editor.customConfig.uploadImgServer = "http://localhost:3000/api/users/updateUserPic"; //服务器接口地址
-
-    this.editor.customConfig.uploadImgParams = { //而外的数据
-        userId: '584521'
-    }
-
-    //   this.editor.txt.text("请编写小说内容"); //设置富文本默认内容
-
-
-      this.editor.create(); //创建
-
-      this.editor.customConfig.uploadImgHooks = {
-      customInsert: function(insertImg, result, editor) {
-        var url = result.data.urlPic; //监听图片上传成功更新页面
-        insertImg(url);
+  onSubmit = ()=>{
+    this.props.form.validateFields(async(err,value)=>{
+      if(err){
+        return
       }
-    };
+      addBook(value).then(()=>{
+        message.success('添加成功')
+      })
+    })
   }
-  handSubmit(e) {
-    console.log(this.editor.txt.text());
-    this.setState({
-      content: this.editor.txt.text()
-    });
+  setConfigItems = ()=>{
+    return [
+      {
+        label:"图书编码",
+        value:"code",
+        options:{
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            },
+          ],
+        },
+        formItem:(
+          <Input placeholder='请填写图书编码'></Input>
+        )
+      },
+      {
+        label:"图书名称",
+        value:"bookName",
+        options:{
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            },
+          ],
+        },
+        formItem:(
+          <Input placeholder='请填写图书名称'></Input>
+        )
+      },
+      {
+        label:"图书作者",
+        value:"author",
+        options:{
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            },
+          ],
+        },
+        formItem:(
+          <Input placeholder='请填写图书作者'></Input>
+        )
+      },
+      {
+        label:"图书价格",
+        value:"price",
+        options:{
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            },
+            {
+              pattern:/^[0-9]+([.]*[0-9]+){0,1}$/,
+              message: '请正确填写',
+            }
+          ],
+        },
+        formItem:(
+          <Input placeholder='请填写图书价格'></Input>
+        )
+      },
+      {
+        label:"图书类型",
+        value:"type",
+        options:{
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            },
+          ],
+        },
+        formItem:(
+          <Input placeholder='请填写图书类型'></Input>
+        )
+      },
+      {
+        label:"图书出版社",
+        value:"press",
+        options:{
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            },
+          ],
+        },
+        formItem:(
+          <Input placeholder='请填写图书出版社'></Input>
+        )
+      },
+      {
+        label:"图书总数",
+        value:"amount",
+        options:{
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            },
+            {
+              pattern:/^[0-9]+([0-9]+){0,1}$/,
+              message: '请正确填写',
+            }
+          ],
+        },
+        formItem:(
+          <Input placeholder='请填写图书总数'></Input>
+        )
+      },
+      {
+        label:"图书描述",
+        value:"describe",
+        options:{
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            },
+          ],
+        },
+        formItem:(
+          <Input placeholder='请填写图书描述'></Input>
+        )
+      }
+    ]
   }
   render() {
+    const {
+      form: { getFieldDecorator },
+    } = this.props;
     return (
       <div>
-        <h2>富文本编辑器</h2>
-        <div ref="editorElem"></div>
-        <div ref="submit" onClick={this.handSubmit.bind(this)}>
-          提交
-        </div>
+        <Form>
+          <Row>
+            {
+              this.setConfigItems().map(v=>(
+                <Col span={8} key={v.value}>
+                  <FormItem label={v.label} {...{labelCol:{span:4},wrapperCol:{span:20}}}>
+                    {
+                      getFieldDecorator(
+                        v.value,
+                        v.options
+                      )(v.formItem)
+                    }
+                  </FormItem>
+                </Col>
+              ))
+            }
+          </Row>
+        </Form>
+        <Button  type="primary" onClick={this.onSubmit}>
+            提交
+        </Button>
       </div>
-    );
+    )
   }
 }
-export default AddBooks;
+
+export default AddBooks

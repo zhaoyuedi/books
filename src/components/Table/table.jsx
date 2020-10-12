@@ -22,45 +22,6 @@ class BaseTable extends React.Component {
     window.addEventListener('resize', this.resize);
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   let { top, center, bottom } = prevProps.detailBox || {
-  //     top: false,
-  //     center: false,
-  //     bottom: false,
-  //   };
-  //   let { top: top1, center: center1, bottom: bottom1, hidden: hidden1 } = this
-  //     .props.detailBox || {
-  //       top: false,
-  //       center: false,
-  //       bottom: false,
-  //       hidden: false,
-  //     };
-  //   if (top === top1 && center === center1 && bottom === bottom1) {
-  //     
-  //   } else {
-  //     if (hidden1 && bottom1) {
-  //       let hh = this.refs.tableBoxAdmin.offsetHeight;
-  //       
-  //       hh < 400
-  //         ? hh === 20
-  //           ? this.setState({ tableH: { y: hh + 480 + 'px' } })
-  //           : this.setState({ tableH: { y: hh + 190 + 'px' } })
-  //         : this.setState({ tableH: { y: hh - 100 + 'px' } });
-  //     } else if (!top1 && center1 && !bottom1) {
-  //       let hh = this.refs.tableBoxAdmin.offsetHeight;
-  //       
-  //       this.setState({ tableH: { y: hh - 400 + 'px' } });
-  //     } else if (!top1 && !center1 && bottom1) {
-  //       let hh = this.refs.tableBoxAdmin.offsetHeight;
-  //       
-  //       hh < 400
-  //         ? hh === 30
-  //           ? this.setState({  })
-  //           : this.setState({  })
-  //         : this.setState({ tableH: { y: hh - 103 + 'px' } });
-  //     }
-  //   }
-  // }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);

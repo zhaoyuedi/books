@@ -12,21 +12,14 @@ export const layoutRoute =[
         key:"/books",
         path:"/books",
         icon:"zhihu",
-        name:"书籍管理",
+        name:"图书管理",
         children:[
             {
                 key:"/books/booksList",
                 path:"/books/booksList",
-                name:"书籍排行",
+                name:"图书查询",
                 component:BooksList,
                 icon:"bars"
-            },
-            {
-                key:"/books/addbooks",
-                path:"/books/addbooks",
-                name:"添加书籍",
-                component:AddBooks,
-                icon:"block"
             }
         ]
     },
@@ -53,7 +46,14 @@ export const layoutRoute =[
         ]
     },
 ]
-
+export const addBook = [
+    {
+        key:"/addBook",
+        path:"/addBook",
+        component:AddBooks,
+        name:"新增图书"
+    }
+]
 export const login = [
     {
         path: "/login",
@@ -64,4 +64,4 @@ export const login = [
     }
 ]
 
-export const baseconfigRouters = layoutRoute.concat(login)
+export const baseconfigRouters = layoutRoute.concat(login).concat(addBook)
