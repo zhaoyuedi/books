@@ -100,7 +100,7 @@ class LayoutComponent extends Component {
               </div>
             </Content>
             <Footer style={{ textAlign: "center" }}>
-              Ant Design ©2018 Created by Ant UED
+              马含茹的图书管理系统
             </Footer>
           </Layout>
         </Layout>

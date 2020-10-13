@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import { BooksList,deleteHandler } from "@api";
+import { BooksList,getRecommendList } from "@api";
 import { withRouter } from 'react-router-dom';
 import { Table,Form, Input,Row,Col, Select,Icon, Button ,Modal,message} from 'antd';
-import { TableWarp } from "./styled";
 
 
 const FormItem = Form.Item;
 const { Option } = Select;
-const {confirm} = Modal
 
 @withRouter
 @Form.create()
-class BooksListWarp extends Component {
+class RecommendList extends Component {
   constructor(){
     super()
     this.state = {
@@ -33,9 +31,13 @@ class BooksListWarp extends Component {
       _limit,
       ...parameter
     }
-    const count = await BooksList({...parameter})
-    console.log(count)
-    BooksList(params).then(res=>{
+    const count = await getRecommendList({...parameter})
+    const data = await BooksList()
+    getRecommendList(params).then(res=>{
+        res.forEach(v=>{
+            v.code = data.find(d=>d.bookName===v.recommendBook).code
+        })
+        console.log(res)
         this.setState({
           table:{
             dataSource:res,
@@ -46,87 +48,55 @@ class BooksListWarp extends Component {
         })
     })
   }
-  modificationHandler = (record)=>{
-    this.props.history.push(`/book/detail/${record.id}`)
-  }
-  deleteHandler = (record)=>{
-    const {table:{current}} = this.state
-    confirm({
-      title: '警告',
-      content: '确定是否删除',
-      okText:"确认",
-      cancelText:"取消",
-      onOk:()=>{
-        deleteHandler(record.id).then(v=>{
-          this.updateTable(current)
-          message.success('删除成功')
-        })
-      },
-    });
-  }
   setColumns = ()=>{
     return [
       {
-        title: '图书编码',
+        title: '推荐图书编码',
         dataIndex: 'code',
         key: 'code',
         width: 200,
       },
       {
-        title: '图书名称',
-        dataIndex: 'bookName',
-        key: 'bookName',
+        title: '推荐人',
+        dataIndex: 'referrer',
+        key: 'referrer',
         width: 200,
       },
       {
-        title: '图书作者',
-        dataIndex: 'author',
-        key: 'author',
+        title: '推荐图书名称',
+        dataIndex: 'recommendBook',
+        key: 'recommendBook',
         width: 200
       },
       {
-        title: '图书价格',
-        dataIndex: 'price',
-        key: 'price',
+        title: '图书推荐次数',
+        dataIndex: 'number',
+        key: 'number',
         width: 200
       },
       {
-        title: '图书类型',
-        dataIndex: 'type',
-        key: 'type',
+        title: '推荐理由',
+        dataIndex: 'reason',
+        key: 'reason',
         width: 200
       },
       {
-        title: '图书出版社',
-        dataIndex: 'press',
-        key: 'press',
+        title: '最新推荐时间',
+        dataIndex: 'time',
+        key: 'time',
         width: 200
       },
       {
-        title: '图书总数',
-        dataIndex: 'amount',
-        key: 'amount',
+        title: '是否收藏',
+        dataIndex: 'flagCollect',
+        key: 'flagCollect',
         width: 200
       },
       {
-        title: '图书描述',
-        dataIndex: 'describe',
-        key: 'describe',
+        title: '评分',
+        dataIndex: 'score',
+        key: 'score',
         width: 200
-      },
-      {
-        width: 100,
-        title: '修改',
-        key: 'modification',
-        render: (text,record) => <span className='fixedSpan' onClick={()=>this.modificationHandler(record)}>修改</span>,
-        fixed: 'right',
-      },
-      {
-        width: 100,
-        title: '删除',
-        key: 'delete',
-        render: (text,record) => <span className='fixedSpan' onClick={()=>this.deleteHandler(record)}>删除</span>,
-        fixed: 'right',
       }
     ];
   }
@@ -150,9 +120,6 @@ class BooksListWarp extends Component {
   clearSearchValues = ()=>{
     this.props.form.resetFields()
   }
-  goAddBook = ()=>{
-    this.props.history.push('/addBook')
-  }
   onFocus = ()=>{
     if(!this.props.form.getFieldValue('type')){
       message.warning('请先选择查询条件')
@@ -166,43 +133,28 @@ class BooksListWarp extends Component {
     } = this.props
     const type = [
       {
-        dicCode:'code',
-        dicName:'图书编码'
+        dicCode:'referrer',
+        dicName:'推荐人'
       },
       {
-        dicCode:'bookName',
-        dicName:'图书名称'
+        dicCode:'recommendBook',
+        dicName:'推荐图书名称'
       },
       {
-        dicCode:'author',
-        dicName:'图书作者'
+        dicCode:'number',
+        dicName:'图书推荐次数'
       },
       {
-        dicCode:'price',
-        dicName:'图书价格'
+        dicCode:'flagCollect',
+        dicName:'是否收藏'
       },
       {
-        dicCode:'type',
-        dicName:'图书类型'
-      },
-      {
-        dicCode:'press',
-        dicName:'图书出版社'
-      },
-      {
-        dicCode:'amount',
-        dicName:'图书总数'
-      },
-      {
-        dicCode:'describe',
-        dicName:'图书描述'
-      },
-    ]
-    const TypeArr = [
-      'IT','农业科学','历史地理','数理科学和化学','文化教育','文学','生物科学','自然科学总论','语言'
+        dicCode:'score',
+        dicName:'评分'
+      }
     ]
     return (
-      <TableWarp>
+      <div>
         <Form labelAlign='left'>
           <Row>
             <Col span={6} >
@@ -235,15 +187,14 @@ class BooksListWarp extends Component {
                 getFieldDecorator(
                   'value'
                 )(
-                  this.props.form.getFieldValue('type')==='type'?
+                  this.props.form.getFieldValue('type')==='flagCollect'?
                   <Select placeholder='请选择查询条件'>
-                      {
-                        TypeArr.map(v=>(
-                          <Option key={v} value={v}>
-                            {v}
-                          </Option>
-                        ))
-                      }
+                      <Option value='1'>
+                        是
+                      </Option>
+                      <Option value='0'>
+                        否
+                      </Option>
                   </Select>
                   :
                   <Input placeholder='请输入查询条件' onFocus={this.onFocus}/>
@@ -257,9 +208,6 @@ class BooksListWarp extends Component {
               </Button>
               <Button type="danger" onClick={this.clearSearchValues} style={{marginRight:5}}>
                 重置信息
-              </Button>
-              <Button type="primary" style={{marginTop:5}} onClick={this.goAddBook}>
-                添加图书
               </Button>
             </Col>
           </Row>
@@ -278,9 +226,9 @@ class BooksListWarp extends Component {
             }}
             scroll={{ x:1500  }}
           />
-      </TableWarp>
+      </div>
     )
   }
 }
 
-export default BooksListWarp
+export default RecommendList

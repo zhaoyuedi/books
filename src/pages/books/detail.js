@@ -3,6 +3,7 @@ import { Table,Form, Input,Row,Col, Select,Icon, Button, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { BooksList,modificationHandler } from "@api";
 const FormItem = Form.Item;
+const {Option} = Select
 
 @withRouter
 @Form.create()
@@ -32,6 +33,9 @@ class Detail extends Component {
   }
   setConfigItems = ()=>{
       const {formData} = this.state
+      const TypeArr = [
+        'IT','农业科学','历史地理','数理科学和化学','文化教育','文学','生物科学','自然科学总论','语言'
+      ]
     return [
       {
         label:"图书编码",
@@ -114,7 +118,15 @@ class Detail extends Component {
           ],
         },
         formItem:(
-          <Input placeholder='请填写图书类型'></Input>
+          <Select placeholder='请选择图书类型'>
+          {
+            TypeArr.map(v=>(
+              <Option key={v} value={v}>
+                {v}
+              </Option>
+            ))
+          }
+          </Select>
         )
       },
       {

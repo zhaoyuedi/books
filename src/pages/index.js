@@ -29,3 +29,23 @@ export const BookDetail = ReactLoad({
     loader:()=>import('./books/detail'),
     loading:Loading
 })
+export const Statistics = ReactLoad({
+    loader:()=>import('./books/statistics'),
+    loading:Loading
+})
+export const Category = ReactLoad({
+    loader:()=>import('./books/category'),
+    loading:Loading
+})
+export const DetailCategory = ReactLoad({
+    loader:()=>import('./books/detailCategory'),
+    loading:Loading
+})
+export const recommendList = ReactLoad({
+    loader:()=>import('./recommend/recommendList'),
+    loading:Loading
+})
+export const recommendSort = ReactLoad({
+    loader:()=>import('./recommend/recommendSort'),
+    loading:Loading
+})

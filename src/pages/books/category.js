@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { BooksList,deleteHandler } from "@api";
+import { getCategory,deleteCategoryHandler } from "@api";
 import { withRouter } from 'react-router-dom';
 import { Table,Form, Input,Row,Col, Select,Icon, Button ,Modal,message} from 'antd';
 import { TableWarp } from "./styled";
-
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -11,7 +10,7 @@ const {confirm} = Modal
 
 @withRouter
 @Form.create()
-class BooksListWarp extends Component {
+class Category extends Component {
   constructor(){
     super()
     this.state = {
@@ -25,7 +24,7 @@ class BooksListWarp extends Component {
   }
   updateTable=async (_page=1,_limit=5)=>{
     this.setState({
-      loading:true
+        loading:true
     })
     const {parameter} = this.state
     let params = {
@@ -33,9 +32,8 @@ class BooksListWarp extends Component {
       _limit,
       ...parameter
     }
-    const count = await BooksList({...parameter})
-    console.log(count)
-    BooksList(params).then(res=>{
+    const count = await getCategory({...parameter})
+    getCategory(params).then(res=>{
         this.setState({
           table:{
             dataSource:res,
@@ -46,9 +44,6 @@ class BooksListWarp extends Component {
         })
     })
   }
-  modificationHandler = (record)=>{
-    this.props.history.push(`/book/detail/${record.id}`)
-  }
   deleteHandler = (record)=>{
     const {table:{current}} = this.state
     confirm({
@@ -57,62 +52,41 @@ class BooksListWarp extends Component {
       okText:"确认",
       cancelText:"取消",
       onOk:()=>{
-        deleteHandler(record.id).then(v=>{
+        deleteCategoryHandler(record.id).then(v=>{
           this.updateTable(current)
           message.success('删除成功')
         })
       },
     });
   }
+  modificationHandler = (record)=>{
+    this.props.history.push(`/category/detailCategory/${record.id}`)
+  }
   setColumns = ()=>{
     return [
       {
-        title: '图书编码',
-        dataIndex: 'code',
-        key: 'code',
-        width: 200,
+        title: '图书类别编码',
+        dataIndex: 'typeNumber',
+        key: 'typeNumber',
+        width: 800,
       },
       {
-        title: '图书名称',
-        dataIndex: 'bookName',
-        key: 'bookName',
-        width: 200,
+        title: '图书类别名称',
+        dataIndex: 'typeName',
+        key: 'typeName',
+        width: 800,
       },
       {
-        title: '图书作者',
-        dataIndex: 'author',
-        key: 'author',
-        width: 200
+        title: '图书类别标识',
+        dataIndex: 'signboard',
+        key: 'signboard',
+        width: 800
       },
       {
-        title: '图书价格',
-        dataIndex: 'price',
-        key: 'price',
-        width: 200
-      },
-      {
-        title: '图书类型',
-        dataIndex: 'type',
-        key: 'type',
-        width: 200
-      },
-      {
-        title: '图书出版社',
-        dataIndex: 'press',
-        key: 'press',
-        width: 200
-      },
-      {
-        title: '图书总数',
-        dataIndex: 'amount',
-        key: 'amount',
-        width: 200
-      },
-      {
-        title: '图书描述',
-        dataIndex: 'describe',
-        key: 'describe',
-        width: 200
+        title: '图书类别扩展',
+        dataIndex: 'typeExtend',
+        key: 'typeExtend',
+        width: 800
       },
       {
         width: 100,
@@ -150,8 +124,8 @@ class BooksListWarp extends Component {
   clearSearchValues = ()=>{
     this.props.form.resetFields()
   }
-  goAddBook = ()=>{
-    this.props.history.push('/addBook')
+  goAddBookType = ()=>{
+    this.props.history.push('/category/detailCategory')
   }
   onFocus = ()=>{
     if(!this.props.form.getFieldValue('type')){
@@ -166,40 +140,21 @@ class BooksListWarp extends Component {
     } = this.props
     const type = [
       {
-        dicCode:'code',
-        dicName:'图书编码'
+        dicCode:'typeNumber',
+        dicName:'图书类别编码'
       },
       {
-        dicCode:'bookName',
-        dicName:'图书名称'
+        dicCode:'typeName',
+        dicName:'图书类别名称'
       },
       {
-        dicCode:'author',
-        dicName:'图书作者'
+        dicCode:'signboard',
+        dicName:'图书类别标识'
       },
       {
-        dicCode:'price',
-        dicName:'图书价格'
-      },
-      {
-        dicCode:'type',
-        dicName:'图书类型'
-      },
-      {
-        dicCode:'press',
-        dicName:'图书出版社'
-      },
-      {
-        dicCode:'amount',
-        dicName:'图书总数'
-      },
-      {
-        dicCode:'describe',
-        dicName:'图书描述'
-      },
-    ]
-    const TypeArr = [
-      'IT','农业科学','历史地理','数理科学和化学','文化教育','文学','生物科学','自然科学总论','语言'
+        dicCode:'typeExtend',
+        dicName:'图书类别扩展'
+      }
     ]
     return (
       <TableWarp>
@@ -235,17 +190,6 @@ class BooksListWarp extends Component {
                 getFieldDecorator(
                   'value'
                 )(
-                  this.props.form.getFieldValue('type')==='type'?
-                  <Select placeholder='请选择查询条件'>
-                      {
-                        TypeArr.map(v=>(
-                          <Option key={v} value={v}>
-                            {v}
-                          </Option>
-                        ))
-                      }
-                  </Select>
-                  :
                   <Input placeholder='请输入查询条件' onFocus={this.onFocus}/>
                 )
               }
@@ -258,8 +202,8 @@ class BooksListWarp extends Component {
               <Button type="danger" onClick={this.clearSearchValues} style={{marginRight:5}}>
                 重置信息
               </Button>
-              <Button type="primary" style={{marginTop:5}} onClick={this.goAddBook}>
-                添加图书
+              <Button type="primary" style={{marginTop:5}} onClick={this.goAddBookType}>
+                添加图书类别
               </Button>
             </Col>
           </Row>
@@ -276,11 +220,11 @@ class BooksListWarp extends Component {
               onChange: this.handleTableChange,
               current:table.current
             }}
-            scroll={{ x:1500  }}
+            scroll={{ x:1000  }}
           />
       </TableWarp>
     )
   }
 }
 
-export default BooksListWarp
+export default Category

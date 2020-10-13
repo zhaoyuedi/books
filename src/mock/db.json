@@ -7,6 +7,14 @@
       "name": "赵曰迪",
       "age": 22,
       "grade": "研二"
+    },
+    {
+      "userId": "lier",
+      "password": "123456",
+      "userName": "李二",
+      "age": "18",
+      "grade": "20",
+      "id": "t1L9Kt4"
     }
   ],
   "bookList": [
@@ -130,6 +138,234 @@
       "press": "科学出版社",
       "amount": 52,
       "describe": "大神养成记"
+    },
+    {
+      "code": "55",
+      "bookName": "PHP",
+      "author": "王教授",
+      "price": "43",
+      "type": "语言",
+      "press": "清华出版社",
+      "amount": "33",
+      "describe": "一起来学习一门语言吧",
+      "id": "0RkHSc1"
+    },
+    {
+      "code": "66",
+      "bookName": "C++",
+      "author": "赵教授",
+      "price": "32",
+      "type": "语言",
+      "press": "清华出版社",
+      "amount": "12",
+      "describe": "一起来学习一门语言吧",
+      "id": "6_zzskz"
+    }
+  ],
+  "recommendList": [
+    {
+      "id": "1",
+      "referrer": "李二",
+      "recommendBook": "Java",
+      "number": "1",
+      "reason": "技术很到位",
+      "time": 1602559889,
+      "flagCollect": "1",
+      "score": "4.4"
+    },
+    {
+      "id": "2",
+      "referrer": "赵四",
+      "recommendBook": "离散数学",
+      "number": "1",
+      "reason": "学到很多",
+      "time": 1602390689,
+      "flagCollect": "1",
+      "score": "4"
+    },
+    {
+      "id": "20",
+      "referrer": "赵姚",
+      "recommendBook": "离散数学",
+      "number": "2",
+      "reason": "很棒",
+      "time": 1602390689,
+      "flagCollect": "1",
+      "score": "5"
+    },
+    {
+      "id": "3",
+      "referrer": "马田",
+      "recommendBook": "数据结构",
+      "number": "2",
+      "reason": "很全面",
+      "time": 1591849889,
+      "flagCollect": "0",
+      "score": "4.6"
+    },
+    {
+      "id": "4",
+      "referrer": "王二",
+      "recommendBook": "计算机系统结构",
+      "number": "3",
+      "reason": "讲的很彻底",
+      "time": 1592195489,
+      "flagCollect": "1",
+      "score": "4.8"
+    },
+    {
+      "id": "5",
+      "referrer": "赵继",
+      "recommendBook": "计算机网络",
+      "number": "1",
+      "reason": "知识点全面",
+      "time": 1602559889,
+      "flagCollect": "1",
+      "score": "3.9"
+    },
+    {
+      "id": "6",
+      "referrer": "赵辉",
+      "recommendBook": "Java",
+      "number": "4",
+      "reason": "学到很多东西",
+      "time": 1592195669,
+      "flagCollect": "1",
+      "score": "4.6"
+    },
+    {
+      "id": "7",
+      "referrer": "李丹",
+      "recommendBook": "操作系统",
+      "number": "1",
+      "reason": "真才实学",
+      "time": 1592369729,
+      "flagCollect": "1",
+      "score": "4.8"
+    },
+    {
+      "id": "8",
+      "referrer": "王晓",
+      "recommendBook": "程序设计",
+      "number": "4",
+      "reason": "通俗易懂，值得推荐",
+      "time": 1592369729,
+      "flagCollect": "1",
+      "score": "4.9"
+    }
+  ],
+  "category": [
+    {
+      "typeNumber": "1",
+      "typeName": "哲学宗教",
+      "signboard": "哲学宗教",
+      "typeExtend": "哲学宗教",
+      "id": "0"
+    },
+    {
+      "id": "1",
+      "typeNumber": "2",
+      "typeName": "社会科学理论",
+      "signboard": "社会科学理论",
+      "typeExtend": "科学理论"
+    },
+    {
+      "id": "2",
+      "typeNumber": "3",
+      "typeName": "政治法律",
+      "signboard": "政治法律",
+      "typeExtend": "政治法律"
+    },
+    {
+      "id": "3",
+      "typeNumber": "4",
+      "typeName": "军事体育",
+      "signboard": "军事体育",
+      "typeExtend": "体育"
+    },
+    {
+      "id": "4",
+      "typeNumber": "5",
+      "typeName": "经济",
+      "signboard": "经济",
+      "typeExtend": "经济贸易"
+    },
+    {
+      "id": "5",
+      "typeNumber": "6",
+      "typeName": "马列主义",
+      "signboard": "马列主义",
+      "typeExtend": "哲学思想"
+    },
+    {
+      "id": "6",
+      "typeNumber": "7",
+      "typeName": "文化教育",
+      "signboard": "文化教育",
+      "typeExtend": "文化教育"
+    },
+    {
+      "id": "7",
+      "typeNumber": "8",
+      "typeName": "语言",
+      "signboard": "语言",
+      "typeExtend": "语言"
+    },
+    {
+      "id": "8",
+      "typeNumber": "9",
+      "typeName": "艺术",
+      "signboard": "艺术",
+      "typeExtend": "艺术"
+    },
+    {
+      "id": "9",
+      "typeNumber": "10",
+      "typeName": "文学",
+      "signboard": "文学",
+      "typeExtend": "哲学"
+    },
+    {
+      "id": "10",
+      "typeNumber": "11",
+      "typeName": "信仰",
+      "signboard": "信仰",
+      "typeExtend": "信仰"
+    },
+    {
+      "id": "11",
+      "typeNumber": "12",
+      "typeName": "电气自动化",
+      "signboard": "电气自动化",
+      "typeExtend": "电气自动化"
+    },
+    {
+      "id": "12",
+      "typeNumber": "13",
+      "typeName": "计算机",
+      "signboard": "计算机",
+      "typeExtend": "计算机"
+    },
+    {
+      "id": "13",
+      "typeNumber": "14",
+      "typeName": "军事农业",
+      "signboard": "军事农业",
+      "typeExtend": "军事农业"
+    },
+    {
+      "id": "14",
+      "typeNumber": "15",
+      "typeName": "动物医学",
+      "signboard": "动物医学",
+      "typeExtend": "动物医学"
+    },
+    {
+      "typeNumber": "100",
+      "typeName": "中国本土文化",
+      "signboard": "中国本土文化",
+      "typeExtend": "中国本土文化",
+      "id": "aCypfsN"
     }
   ]
 }
