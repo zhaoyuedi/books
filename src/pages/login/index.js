@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { Form, Icon, Input, Button, message } from "antd";
+import { Form, Icon, Input, Button, message, Select } from "antd";
 import { LoginWrapper } from "./styled";
 import connect from "./connect";
 import Cookies from "js-cookie";
-import { getUser, registerHandelr} from "@api";
+import { getUser, registerHandelr,modificationUserHandler} from "@api";
+const {Option} = Select
 
 @connect
 @Form.create()
@@ -48,9 +49,16 @@ class Login extends Component {
       //     message.info(`${data.data.info.msg}`);
       //   }
       // }
-      Cookies.set('token',1111)
-      message.success("欢迎进入")
-      this.props.history.push("/home")
+      console.log(data)
+      modificationUserHandler(data[0].id,{
+        ...data[0],
+        logTime:new Date().getTime()
+      }).then(v=>{
+        Cookies.set('token',1111)
+        Cookies.set('userId',values.userId)
+        this.props.history.push("/home")
+        message.success("欢迎进入")
+      })
     });
   };
   registerHandelr = e => {
@@ -60,11 +68,12 @@ class Login extends Component {
         return
       }
       const data = await getUser({userId:values.userId})
+      const codeNumber = await getUser()
       if(data.length){
         message.info("账号重复，请重新填写");
         return
       }
-      registerHandelr(values).then(v=>{
+      registerHandelr({...values,code:Number(codeNumber.pop().code)+1,registerTime:new Date().getTime(),alterNum:'0'}).then(v=>{
         message.info("注册成功,请登录");
         this.setState({
           flag: true
@@ -75,12 +84,13 @@ class Login extends Component {
   };
   render() {
     const { getFieldDecorator } = this.props.form;
+    const gradeArr = ['研一','研二','研三']
     return (
       <Fragment>
         <LoginWrapper>
           {this.state.flag ? (
             <Form onSubmit={this.handleSubmit} className="login-form">
-              <Form.Item>
+             <Form.Item label='账号' {...{labelCol:{span:4},wrapperCol:{span:20}}}>
                 {getFieldDecorator("userId", {
                   rules: [
                     { required: true,message:"请正确填写账号"},
@@ -95,7 +105,7 @@ class Login extends Component {
                   />
                 )}
               </Form.Item>
-              <Form.Item>
+              <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='密码'>
                 {getFieldDecorator("password", {
                   rules: [
                     { required: true,message:"请填写密码" },
@@ -131,8 +141,8 @@ class Login extends Component {
               </Form.Item>
             </Form>
           ) : (
-            <Form onSubmit={this.registerHandelr} className="login-form">
-              <Form.Item>
+            <Form onSubmit={this.registerHandelr} className="login-form" >
+            <Form.Item label='账号' {...{labelCol:{span:4},wrapperCol:{span:20}}}>
                 {getFieldDecorator("userId", {
                   rules: [
                     { required: true, message:"请输入你的账号"},
@@ -141,13 +151,13 @@ class Login extends Component {
                 })(
                   <Input
                     prefix={
-                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                      <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }}/>
                     }
                     placeholder="请输入你的账号"
                   />
                 )}
               </Form.Item>
-              <Form.Item>
+              <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='密码'>
                 {getFieldDecorator("password", {
                   rules: [
                     { required: true,message:"请输入你的密码" },
@@ -163,7 +173,7 @@ class Login extends Component {
                   />
                 )}
               </Form.Item>
-              <Form.Item>
+              <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='姓名'>
                 {getFieldDecorator("userName", {
                   rules: [
                     { required: true,message:"请输入你的姓名" },
@@ -178,7 +188,7 @@ class Login extends Component {
                   />
                 )}
               </Form.Item>
-              <Form.Item>
+              <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='年龄'>
                 {getFieldDecorator("age", {
                   rules: [
                     { required: true,message:"请输入你的年龄" },
@@ -193,18 +203,35 @@ class Login extends Component {
                   />
                 )}
               </Form.Item>
-              <Form.Item>
+              <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='年级'>
                 {getFieldDecorator("grade", {
                   rules: [
-                    { required: true,message:"请输入你的所在年级" },
-                    {/* { pattern: /^\d{5,8}$/, message: "不能少于5位数字" } */}
+                    { required: true,message:"请选择你的所在年级" },
+                  ]
+                })(
+                  <Select placeholder='请选择年级'>
+                    {
+                      gradeArr.map(v=>(
+                        <Option value={v}>
+                          {v}
+                        </Option>
+                      ))
+                    }
+                  </Select>
+                )}
+              </Form.Item>
+              <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='电话'>
+                {getFieldDecorator("call", {
+                  rules: [
+                    { required: true,message:"请输入你的电话" },
+                    { pattern: /^[0-9]+([0-9]+)+$/, message: "请正确输入" }
                   ]
                 })(
                   <Input
                     prefix={
                       <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
-                    placeholder="请输入你的年龄"
+                    placeholder="请输入你的电话"
                   />
                 )}
               </Form.Item>

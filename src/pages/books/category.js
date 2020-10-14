@@ -60,7 +60,7 @@ class Category extends Component {
     });
   }
   modificationHandler = (record)=>{
-    this.props.history.push(`/category/detailCategory/${record.id}`)
+    this.props.history.push(`/category/detail/${record.id}`)
   }
   setColumns = ()=>{
     return [
@@ -125,7 +125,7 @@ class Category extends Component {
     this.props.form.resetFields()
   }
   goAddBookType = ()=>{
-    this.props.history.push('/category/detailCategory')
+    this.props.history.push('/category/detail')
   }
   onFocus = ()=>{
     if(!this.props.form.getFieldValue('type')){

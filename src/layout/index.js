@@ -10,16 +10,19 @@ import {
   Form,
   Input,
   message,
-  Avatar
+  Avatar,
+  Select
 } from "antd";
 import { layoutRoute } from "@router";
 import TabBar from "@utils/TabBar";
 import { withRouter } from "react-router-dom";
-import cookie from "js-cookie";
+import Cookies from "js-cookie";
 import connect from "./connect";
-import { UpdatePassword } from "@api";
+import { UpdatePassword,getUser,modificationUserHandler } from "@api";
+import userInfo from "../pages/home";
 
 const { Header, Content, Footer, Sider } = Layout;
+const {Option} = Select
 
 @withRouter
 @connect
@@ -30,12 +33,22 @@ class LayoutComponent extends Component {
     this.state = {
       visible: false,
       visibleNmae: false,
-      val: ''
+      val: '',
+      userInfo:{}
     };
   }
+ async componentDidMount(){
+    const userId = Cookies.get('userId')
+    const userInfos =await getUser({userId})
+    this.setState({
+      userInfo:userInfos[0],
+    })
+  }
   render() {
-    let { form, onCancel, onCreate } = this.props;
+    let { form } = this.props;
+    const {userInfo} = this.state
     const { getFieldDecorator } = form;
+    const gradeArr = ['研一','研二','研三']
     const menu = (
       <Menu onClick={this.handleMenuClick.bind(this)}>
         <Menu.Item key="1">
@@ -44,11 +57,7 @@ class LayoutComponent extends Component {
         </Menu.Item>
         <Menu.Item key="2">
           <Icon type="user" />
-          修改密码
-        </Menu.Item>
-        <Menu.Item key="4">
-          <Icon type="user" />
-          修改昵称
+          修改信息
         </Menu.Item>
         <Menu.Item key="3">
           <Icon type="user" />
@@ -81,9 +90,9 @@ class LayoutComponent extends Component {
                     style={{ display: "flex" }}
                   >
                     <div style={{ marginRight: "10px", color: "#001529" }}>
-                      {/* 你好,{this.props.userName} */}
+                      你好,{this.state.userInfo.userName}
                     </div>
-                    <div style={{ marginRight: "120px" }}>  <Avatar src={this.props.userPic} /></div>
+                    <div style={{ marginRight: "120px" }}>  <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /></div>
                     <Dropdown.Button overlay={menu} icon={<Icon type="user" />}>
                       个人中心
                     </Dropdown.Button>
@@ -107,18 +116,18 @@ class LayoutComponent extends Component {
 
         <Modal
           visible={this.state.visible}
-          title="修改密码"
+          title="修改信息"
           onCancel={this.onCancel.bind(this)}
           onOk={this.onOk.bind(this)}
           okText={"确定修改"}
           cancelText={"取消"}
         >
-          <Form layout="vertical">
-            <Form.Item>
+          <Form >
+            <Form.Item label='账号' {...{labelCol:{span:4},wrapperCol:{span:20}}}>
               {getFieldDecorator("userId", {
+                initialValue:userInfo.userId,
                 rules: [
-                  { required: true },
-                  { pattern: /^\w{5,8}$/, message: "请正确填写账号" }
+                  { required: true,message:"请填写" }
                 ]
               })(
                 <Input
@@ -129,11 +138,11 @@ class LayoutComponent extends Component {
                 />
               )}
             </Form.Item>
-            <Form.Item>
-              {getFieldDecorator("newpassword", {
+            <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='密码'>
+              {getFieldDecorator("password", {
+                initialValue:userInfo.password,
                 rules: [
-                  { required: true },
-                  { pattern: /^\d{5,8}$/, message: "请正确填写密码" }
+                  { required: true,message:"请填写" },
                 ]
               })(
                 <Input
@@ -141,21 +150,77 @@ class LayoutComponent extends Component {
                     <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                   type="password"
-                  placeholder="新密码"
+                  placeholder="请输入密码"
                 />
               )}
             </Form.Item>
+            <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='姓名'>
+                {getFieldDecorator("userName", {
+                  initialValue:userInfo.userName,
+                  rules: [
+                    { required: true,message:"请输入你的姓名" },
+                    {/* { pattern: /^\d{5,8}$/, message: "不能少于5位数字" } */}
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    placeholder="请输入你的姓名"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='年龄'>
+                {getFieldDecorator("age", {
+                  initialValue:userInfo.age,
+                  rules: [
+                    { required: true,message:"请输入你的年龄" },
+                    {/* { pattern: /^\d{5,8}$/, message: "不能少于5位数字" } */}
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    placeholder="请输入你的年龄"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='年级'>
+                {getFieldDecorator("grade", {
+                  initialValue:userInfo.grade,
+                  rules: [
+                    { required: true,message:"请选择你的所在年级" },
+                  ]
+                })(
+                  <Select placeholder='请选择年级'>
+                    {
+                      gradeArr.map(v=>(
+                        <Option value={v}>
+                          {v}
+                        </Option>
+                      ))
+                    }
+                  </Select>
+                )}
+              </Form.Item>
+              <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='电话'>
+                {getFieldDecorator("call", {
+                  initialValue:userInfo.call,
+                  rules: [
+                    { required: true,message:"请输入你的电话" },
+                    { pattern: /^[0-9]+([0-9]+)+$/, message: "请正确输入" }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                    }
+                    placeholder="请输入你的电话"
+                  />
+                )}
+              </Form.Item>
           </Form>
-        </Modal>
-        <Modal
-          visible={this.state.visibleNmae}
-          title="修改昵称"
-          onCancel={this.Cancel.bind(this)}
-          onOk={this.Oks.bind(this)}
-          okText={"确定修改"}
-          cancelText={"取消"}
-        >
-          <Input placeholder="昵称" onChange={this.Inputhandler.bind(this)} />
         </Modal>
       </Fragment>
     );
@@ -168,19 +233,16 @@ class LayoutComponent extends Component {
       val: e.target.value
     })
   }
-  handleMenuClick(e) {
+ async handleMenuClick(e) {
     if (e.key === "3") {
-      cookie.remove("token");
+      Cookies.remove("token");
+      this.props.history.push('/login')
     } else if (e.key === "2") {
       this.setState({
         visible: true
       });
     } else if (e.key === "1") {
       this.props.history.push("/user/userinfo");
-    } else if (e.key === '4') {
-      this.setState({
-        visibleNmae: true
-      })
     }
   }
   onCancel() {
@@ -195,27 +257,16 @@ class LayoutComponent extends Component {
   }
   onOk() {
     this.props.form.validateFields(async (err, val) => {
-      if (!err) {
-        let { userId, newpassword } = val;
-        let data = await UpdatePassword(userId, newpassword);
-        message.info("修改成功");
-        this.setState({
-          visible: false
+        if(err){
+          return
+        }
+        const  {userInfo} = this.state
+        modificationUserHandler(userInfo.id,{...userInfo,...val}).then(v=>{
+          message.info("修改成功,请重新登录");
+          Cookies.remove("token");
+          this.props.history.push('/login')
         });
-      }
     });
-  }
-  async Oks() {
-    let { val } = this.state
-    let data = await this.props.handlerName(val)
-    if (true) {
-      message.info("修改成功");
-      this.setState({
-        visibleNmae: false
-      })
-    }else{
-      message.error("修改失败");
-    }
   }
 }
 

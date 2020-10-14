@@ -1,30 +1,57 @@
 import React, { Component } from 'react'
 import { Table,Form, Input,Row,Col, Select,Icon, Button, message } from 'antd';
-import { addBook } from "@api";
+import { withRouter } from 'react-router-dom';
+import { getUser,modificationUserHandler,registerHandelr } from "@api";
 const FormItem = Form.Item;
 const {Option} = Select
 
+@withRouter
 @Form.create()
-class AddBooks extends Component {
+class UserDetail extends Component {
+    constructor(){
+        super()
+        this.state = {
+            formData:{}
+        }
+    }
+ async componentDidMount(){
+    if(this.props.match.params.id){
+        const data = await getUser(this.props.match.params)
+        this.setState({
+            formData:data[0]
+        })
+    }
+  }
   onSubmit = ()=>{
-    this.props.form.validateFields(async(err,value)=>{
-      if(err){
+    if(this.props.match.params.id){
+        this.props.form.validateFields(async(err,value)=>{
+            if(err){
+              return
+            }
+            modificationUserHandler(this.props.match.params.id,value).then(()=>{
+              message.success('修改成功')
+            })
+        })
         return
-      }
-      addBook(value).then(()=>{
-        message.success('添加成功')
-      })
+    }
+    this.props.form.validateFields(async(err,value)=>{
+        if(err){
+          return
+        }
+        registerHandelr(value).then(()=>{
+          message.success('添加成功')
+        })
     })
   }
   setConfigItems = ()=>{
-    const TypeArr = [
-      'IT','农业科学','历史地理','数理科学和化学','文化教育','文学','生物科学','自然科学总论','语言'
-    ]
+    const {formData} = this.state
+    const TypeArr = ['研一','研二','研三']
     return [
       {
-        label:"图书编号",
+        label:"用户编号",
         value:"code",
         options:{
+          initialValue:formData.code,
           rules: [
             {
               required: true,
@@ -33,13 +60,14 @@ class AddBooks extends Component {
           ],
         },
         formItem:(
-          <Input placeholder='请填写图书编码'></Input>
+          <Input placeholder='用户编码自动生成不可修改' disabled></Input>
         )
       },
       {
-        label:"图书名称",
-        value:"bookName",
+        label:"用户账号",
+        value:"userId",
         options:{
+          initialValue:formData.userId,
           rules: [
             {
               required: true,
@@ -48,13 +76,14 @@ class AddBooks extends Component {
           ],
         },
         formItem:(
-          <Input placeholder='请填写图书名称'></Input>
+          <Input placeholder='请填写用户账号'></Input>
         )
       },
       {
-        label:"图书作者",
-        value:"author",
+        label:"用户密码",
+        value:"password",
         options:{
+          initialValue:formData.password,
           rules: [
             {
               required: true,
@@ -63,70 +92,14 @@ class AddBooks extends Component {
           ],
         },
         formItem:(
-          <Input placeholder='请填写图书作者'></Input>
+          <Input.Password  placeholder='请填写用户密码'></Input.Password>
         )
       },
       {
-        label:"图书价格",
-        value:"price",
+        label:"用户电话",
+        value:"call",
         options:{
-          rules: [
-            {
-              required: true,
-              message: '请填写',
-            },
-            {
-              pattern:/^[0-9]+([.]*[0-9]+){0,1}$/,
-              message: '请正确填写',
-            }
-          ],
-        },
-        formItem:(
-          <Input placeholder='请填写图书价格'></Input>
-        )
-      },
-      {
-        label:"图书类型",
-        value:"type",
-        options:{
-          rules: [
-            {
-              required: true,
-              message: '请填写',
-            },
-          ],
-        },
-        formItem:(
-          <Select placeholder='请选择图书类型'>
-              {
-                TypeArr.map(v=>(
-                  <Option key={v} value={v}>
-                    {v}
-                  </Option>
-                ))
-              }
-          </Select>
-        )
-      },
-      {
-        label:"图书出版社",
-        value:"press",
-        options:{
-          rules: [
-            {
-              required: true,
-              message: '请填写',
-            },
-          ],
-        },
-        formItem:(
-          <Input placeholder='请填写图书出版社'></Input>
-        )
-      },
-      {
-        label:"图书总数",
-        value:"amount",
-        options:{
+          initialValue:formData.call,
           rules: [
             {
               required: true,
@@ -139,13 +112,34 @@ class AddBooks extends Component {
           ],
         },
         formItem:(
-          <Input placeholder='请填写图书总数'></Input>
+          <Input placeholder='请填写用户电话'></Input>
         )
       },
       {
-        label:"图书描述",
-        value:"describe",
+        label:"用户年龄",
+        value:"age",
         options:{
+          initialValue:formData.age,
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            },
+              {
+              pattern:/^[0-9]+([0-9]+){0,1}$/,
+              message: '请正确填写',
+            }
+          ],
+        },
+        formItem:(
+            <Input placeholder='请填写用户年龄'></Input>
+          )
+      },
+      {
+        label:"年级",
+        value:"grade",
+        options:{
+          initialValue:formData.grade,
           rules: [
             {
               required: true,
@@ -154,7 +148,35 @@ class AddBooks extends Component {
           ],
         },
         formItem:(
-          <Input placeholder='请填写图书描述'></Input>
+            <Select placeholder='请选择年级'>
+                      {
+                        TypeArr.map(v=>(
+                          <Option key={v} value={v}>
+                            {v}
+                          </Option>
+                        ))
+                      }
+            </Select>
+        )
+      },
+      {
+        label:"用户修改次数",
+        value:"alterNum",
+        options:{
+          initialValue:formData.alterNum,
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            },
+            {
+              pattern:/^[0-9]+([0-9]+){0,1}$/,
+              message: '请正确填写',
+            }
+          ],
+        },
+        formItem:(
+          <Input placeholder='请填写用户修改次数'></Input>
         )
       }
     ]
@@ -191,4 +213,4 @@ class AddBooks extends Component {
   }
 }
 
-export default AddBooks
+export default UserDetail

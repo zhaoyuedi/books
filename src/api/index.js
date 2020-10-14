@@ -38,19 +38,15 @@ export const modifyUserPicApi = (formdata)=>{
          }).then(res=>res.json())
    }
 export const BooksList = (params)=>http.get('http://localhost:3000/bookList',params)
-export const addBook = (data)=>http.post('http://localhost:3000/bookList',{
-    ...data,
-})
+export const addBook = (data)=>http.post('http://localhost:3000/bookList',data)
 export const getUser = (params)=>http.get('http://localhost:3000/user',params)
-export const registerHandelr = (data)=>http.post('http://localhost:3000/user',{
-    ...data,
-})
+export const registerHandelr = (data)=>http.post('http://localhost:3000/user',data)
 export const modificationHandler = (id,data)=>http.put(`http://localhost:3000/bookList/${id}`,data)
 export const deleteHandler = (id,data)=>http.Delete(`http://localhost:3000/bookList/${id}`,data)
 export const getRecommendList = (params)=>http.get('http://localhost:3000/recommendList',params)
 export const getCategory = (params)=>http.get('http://localhost:3000/category',params)
 export const deleteCategoryHandler = (id,data)=>http.Delete(`http://localhost:3000/category/${id}`,data)
 export const modificationCategoryHandler = (id,data)=>http.put(`http://localhost:3000/category/${id}`,data)
-export const addCategory = (data)=>http.post('http://localhost:3000/category',{
-    ...data,
-})
+export const addCategory = (data)=>http.post('http://localhost:3000/category',data)
+export const modificationUserHandler = (id,data)=>http.put(`http://localhost:3000/user/${id}`,data)
+export const deleteUserHandler = (id,data)=>http.Delete(`http://localhost:3000/user/${id}`,data)

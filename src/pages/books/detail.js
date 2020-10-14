@@ -38,7 +38,7 @@ class Detail extends Component {
       ]
     return [
       {
-        label:"图书编码",
+        label:"图书编号",
         value:"code",
         options:{
           initialValue:formData.code,

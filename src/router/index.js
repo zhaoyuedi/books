@@ -1,5 +1,5 @@
 import {Home,UserList,AddBooks,BooksList,UserInfo,Login,BookDetail,
-    Statistics,recommendList,recommendSort,Category,DetailCategory} from '@pages'
+    Statistics,recommendList,recommendSort,Category,DetailCategory,UserDetail} from '@pages'
 
 export const layoutRoute =[
     {
@@ -20,7 +20,7 @@ export const layoutRoute =[
                 path:"/books/booksList",
                 name:"图书查询",
                 component:BooksList,
-                icon:"bars"
+                icon:"zoom-in"
             },
             {
                 
@@ -28,7 +28,7 @@ export const layoutRoute =[
                 path:"/books/statistics",
                 name:"种类统计",
                 component:Statistics,
-                icon:"bars"
+                icon:"pie-chart"
             },
             {
                 
@@ -36,7 +36,7 @@ export const layoutRoute =[
                 path:"/books/category",
                 name:"类别统计",
                 component:Category,
-                icon:"bars"
+                icon:"pie-chart"
             }
         ]
     },
@@ -51,14 +51,14 @@ export const layoutRoute =[
                 path:"/recommend/recommendList",
                 name:"图书推荐",
                 component:recommendList,
-                icon:"bars"
+                icon:"heart"
             },
             {
                 key:"/recommend/sort",
                 path:"/recommend/sort",
                 name:"推荐排行",
                 component:recommendSort,
-                icon:"bars"
+                icon:"fire"
             }
         ]
     },
@@ -68,13 +68,13 @@ export const layoutRoute =[
         icon:"user",
         name:"用户管理",
         children:[
-            {
-                key:"/user/userinfo",
-                path:"/user/userinfo",
-                name:"个人信息",
-                component:UserInfo,
-                icon:"user-delete"
-            },
+            // {
+            //     key:"/user/userinfo",
+            //     path:"/user/userinfo",
+            //     name:"个人信息",
+            //     component:UserInfo,
+            //     icon:"user-delete"
+            // },
             {
                 key:"/user/userlist",
                 path:"/user/userlist",
@@ -99,10 +99,16 @@ export const page = [
         name:"图书详情"
     },
     {
-        key:"/category/detailCategory",
-        path:"/category/detailCategory/:id?",
+        key:"/category/detail",
+        path:"/category/detail/:id?",
         component:DetailCategory,
         name:"新增图书类型"
+    },
+    {
+        key:"/userList/detail",
+        path:"/userList/detail/:id?",
+        component:UserDetail,
+        name:"新增用户"
     }
 ]
 export const login = [

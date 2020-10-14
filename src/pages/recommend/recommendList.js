@@ -51,7 +51,7 @@ class RecommendList extends Component {
   setColumns = ()=>{
     return [
       {
-        title: '推荐图书编码',
+        title: '推荐图书编号',
         dataIndex: 'code',
         key: 'code',
         width: 200,

@@ -67,7 +67,7 @@ class BooksListWarp extends Component {
   setColumns = ()=>{
     return [
       {
-        title: '图书编码',
+        title: '图书编号',
         dataIndex: 'code',
         key: 'code',
         width: 200,

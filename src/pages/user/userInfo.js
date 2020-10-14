@@ -14,16 +14,16 @@ export class userInfo extends Component {
     };
   }
   async componentDidMount() {
-    let data = await userList();
-    let arr = data.data.list;
-    let userId = localStorage.getItem("userId");
-    let userInfos = arr.filter(item => {
-      return item.userId === userId;
-    });
-    console.log(userInfos);
-    this.setState({
-      userInfos: userInfos[0]
-    });
+    // let data = await userList();
+    // let arr = data.data.list;
+    // let userId = localStorage.getItem("userId");
+    // let userInfos = arr.filter(item => {
+    //   return item.userId === userId;
+    // });
+    // console.log(userInfos);
+    // this.setState({
+    //   userInfos: userInfos[0]
+    // });
   }
   render() {
     let { userInfos, visible } = this.state;
