@@ -7,31 +7,32 @@
       "userName": "赵强",
       "call": "13268522799",
       "age": "23",
-      "grade": "研二",
+      "grade": "高三",
       "alterNum": "1",
       "id": "1",
       "registerTime": "1592369729000",
-      "logTime": "1602665208127"
+      "logTime": "1602764991730",
+      "Administrator": "1"
     },
     {
       "userId": "lier",
       "password": "123456",
       "userName": "李二",
       "age": "18",
-      "grade": "研二",
+      "grade": "高一",
       "call": "13268522799",
       "alterNum": "3",
       "id": "t1L9Kt4",
       "code": "2",
       "registerTime": "1592369729000",
-      "logTime": "1592369729000"
+      "logTime": "1602748226246"
     },
     {
       "userId": "zzz",
       "password": "5882883",
       "userName": "王晓",
       "age": "24",
-      "grade": "研三",
+      "grade": "初一",
       "call": "150263485935",
       "alterNum": "2",
       "id": "ERaDJEm",
@@ -44,7 +45,7 @@
       "password": "12334",
       "userName": "王丽",
       "age": "23",
-      "grade": "研二",
+      "grade": "六年级",
       "call": "13245646789",
       "id": "ZAgmLOH",
       "alterNum": "1",
@@ -57,7 +58,7 @@
       "password": "123456",
       "userName": "王艳",
       "age": "23",
-      "grade": "研一",
+      "grade": "高二",
       "call": "150263485935",
       "code": "6",
       "alterNum": "1",
@@ -68,15 +69,16 @@
   ],
   "bookList": [
     {
-      "id": "1",
       "code": "1",
       "bookName": "Java",
       "author": "马教授",
       "price": "26",
       "type": "IT",
       "press": "科学出版社",
-      "amount": 52,
-      "describe": "大神养成记"
+      "amount": "52",
+      "grade": "二年级",
+      "describe": "大神养成记",
+      "id": "1"
     },
     {
       "code": "2",
@@ -87,7 +89,8 @@
       "press": "科学出版社",
       "amount": "58",
       "describe": "大神养成记",
-      "id": "2"
+      "id": "2",
+      "grade": "一年级,五年级"
     },
     {
       "id": "3",
@@ -98,7 +101,8 @@
       "type": "IT",
       "press": "科学出版社",
       "amount": 52,
-      "describe": "大神养成记"
+      "describe": "大神养成记",
+      "grade": "一年级,五年级"
     },
     {
       "id": "4",
@@ -109,7 +113,8 @@
       "type": "IT",
       "press": "科学出版社",
       "amount": 52,
-      "describe": "大神养成记"
+      "describe": "大神养成记",
+      "grade": "一年级,五年级"
     },
     {
       "id": "5",
@@ -120,7 +125,8 @@
       "type": "IT",
       "press": "科学出版社",
       "amount": 52,
-      "describe": "大神养成记"
+      "describe": "大神养成记",
+      "grade": "一年级,五年级"
     },
     {
       "id": "6",
@@ -131,7 +137,8 @@
       "type": "IT",
       "press": "科学出版社",
       "amount": 52,
-      "describe": "大神养成记"
+      "describe": "大神养成记",
+      "grade": "一年级,五年级"
     },
     {
       "id": "7",
@@ -142,7 +149,8 @@
       "type": "IT",
       "press": "科学出版社",
       "amount": 52,
-      "describe": "大神养成记"
+      "describe": "大神养成记",
+      "grade": "一年级,五年级"
     },
     {
       "id": "8",
@@ -153,7 +161,8 @@
       "type": "IT",
       "press": "科学出版社",
       "amount": 52,
-      "describe": "大神养成记"
+      "describe": "大神养成记",
+      "grade": "一年级,五年级"
     },
     {
       "id": "9",
@@ -164,7 +173,8 @@
       "type": "IT",
       "press": "科学出版社",
       "amount": 52,
-      "describe": "大神养成记"
+      "describe": "大神养成记",
+      "grade": "一年级,五年级"
     },
     {
       "id": "10",
@@ -175,7 +185,8 @@
       "type": "IT",
       "press": "科学出版社",
       "amount": 52,
-      "describe": "大神养成记"
+      "describe": "大神养成记",
+      "grade": "一年级,五年级"
     },
     {
       "id": "11",
@@ -186,7 +197,8 @@
       "type": "IT",
       "press": "科学出版社",
       "amount": 52,
-      "describe": "大神养成记"
+      "describe": "大神养成记",
+      "grade": "一年级,五年级"
     },
     {
       "code": "55",
@@ -197,6 +209,7 @@
       "press": "清华出版社",
       "amount": "33",
       "describe": "一起来学习一门语言吧",
+      "grade": "一年级,五年级",
       "id": "0RkHSc1"
     },
     {
@@ -208,6 +221,7 @@
       "press": "清华出版社",
       "amount": "12",
       "describe": "一起来学习一门语言吧",
+      "grade": "一年级,五年级",
       "id": "6_zzskz"
     }
   ],
@@ -309,6 +323,7 @@
       "typeName": "哲学宗教",
       "signboard": "哲学宗教",
       "typeExtend": "哲学宗教",
+      "grade": "一年级,五年级",
       "id": "0"
     },
     {
@@ -316,6 +331,7 @@
       "typeNumber": "2",
       "typeName": "社会科学理论",
       "signboard": "社会科学理论",
+      "grade": "一年级,五年级",
       "typeExtend": "科学理论"
     },
     {
@@ -323,6 +339,7 @@
       "typeNumber": "3",
       "typeName": "政治法律",
       "signboard": "政治法律",
+      "grade": "一年级,五年级",
       "typeExtend": "政治法律"
     },
     {
@@ -330,6 +347,7 @@
       "typeNumber": "4",
       "typeName": "军事体育",
       "signboard": "军事体育",
+      "grade": "一年级,五年级",
       "typeExtend": "体育"
     },
     {
@@ -337,6 +355,7 @@
       "typeNumber": "5",
       "typeName": "经济",
       "signboard": "经济",
+      "grade": "一年级,五年级",
       "typeExtend": "经济贸易"
     },
     {
@@ -344,6 +363,7 @@
       "typeNumber": "6",
       "typeName": "马列主义",
       "signboard": "马列主义",
+      "grade": "一年级,五年级",
       "typeExtend": "哲学思想"
     },
     {
@@ -351,6 +371,7 @@
       "typeNumber": "7",
       "typeName": "文化教育",
       "signboard": "文化教育",
+      "grade": "一年级,五年级",
       "typeExtend": "文化教育"
     },
     {
@@ -358,6 +379,7 @@
       "typeNumber": "8",
       "typeName": "语言",
       "signboard": "语言",
+      "grade": "一年级,五年级",
       "typeExtend": "语言"
     },
     {
@@ -365,6 +387,7 @@
       "typeNumber": "9",
       "typeName": "艺术",
       "signboard": "艺术",
+      "grade": "一年级,五年级",
       "typeExtend": "艺术"
     },
     {
@@ -372,6 +395,7 @@
       "typeNumber": "10",
       "typeName": "文学",
       "signboard": "文学",
+      "grade": "一年级,五年级",
       "typeExtend": "哲学"
     },
     {
@@ -379,6 +403,7 @@
       "typeNumber": "11",
       "typeName": "信仰",
       "signboard": "信仰",
+      "grade": "一年级,五年级",
       "typeExtend": "信仰"
     },
     {
@@ -386,6 +411,7 @@
       "typeNumber": "12",
       "typeName": "电气自动化",
       "signboard": "电气自动化",
+      "grade": "一年级,五年级",
       "typeExtend": "电气自动化"
     },
     {
@@ -393,6 +419,7 @@
       "typeNumber": "13",
       "typeName": "计算机",
       "signboard": "计算机",
+      "grade": "一年级,五年级",
       "typeExtend": "计算机"
     },
     {
@@ -400,6 +427,7 @@
       "typeNumber": "14",
       "typeName": "军事农业",
       "signboard": "军事农业",
+      "grade": "一年级,五年级",
       "typeExtend": "军事农业"
     },
     {
@@ -407,12 +435,14 @@
       "typeNumber": "15",
       "typeName": "动物医学",
       "signboard": "动物医学",
+      "grade": "一年级,五年级",
       "typeExtend": "动物医学"
     },
     {
       "typeNumber": "100",
       "typeName": "中国本土文化",
       "signboard": "中国本土文化",
+      "grade": "二年级",
       "typeExtend": "中国本土文化",
       "id": "aCypfsN"
     }

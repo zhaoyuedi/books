@@ -26,7 +26,7 @@ class Detail extends Component {
       if(err){
         return
       }
-      modificationHandler(this.props.match.params.id,value).then(()=>{
+      modificationHandler(this.props.match.params.id,{...value,grade:value.grade.join(',')}).then(()=>{
         message.success('修改成功')
       })
     })
@@ -36,6 +36,8 @@ class Detail extends Component {
       const TypeArr = [
         'IT','农业科学','历史地理','数理科学和化学','文化教育','文学','生物科学','自然科学总论','语言'
       ]
+      const gradeArr = ['一年级','二年级','三年级','四年级','五年级','六年级','初一','初二','初三','高一','高二','高三']
+      console.log(formData)
     return [
       {
         label:"图书编号",
@@ -163,6 +165,30 @@ class Detail extends Component {
         },
         formItem:(
           <Input placeholder='请填写图书总数'></Input>
+        )
+      },
+      {
+        label:"年级",
+        value:"grade",
+        options:{
+          initialValue:formData.grade&&formData.grade.split(','),
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            }
+          ],
+        },
+        formItem:(
+          <Select placeholder='请选择年级' mode='multiple'>
+          {
+            gradeArr.map(v=>(
+              <Option key={v} value={v}>
+                {v}
+              </Option>
+            ))
+          }
+      </Select>
         )
       },
       {

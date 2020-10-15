@@ -13,7 +13,7 @@ import {
   Avatar,
   Select
 } from "antd";
-import { layoutRoute } from "@router";
+import { layoutRouteAdministrator,layoutRoute } from "@router";
 import TabBar from "@utils/TabBar";
 import { withRouter } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -78,7 +78,7 @@ class LayoutComponent extends Component {
           >
             <div className="logo" />
             <Menu theme="dark" mode="inline" onClick={this.handler.bind(this)}>
-              {TabBar(layoutRoute)}
+              {TabBar(layoutRouteAdministrator,layoutRoute,userInfo)}
             </Menu>
           </Sider>
           <Layout style={{ marginLeft: 200 }}>

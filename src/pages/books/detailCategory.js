@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Form, Input,Row,Col, Button, message } from 'antd';
+import { Form, Input,Row,Col, Button, message,Select } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { getCategory,modificationCategoryHandler,addCategory } from "@api";
 const FormItem = Form.Item;
+const {Option} = Select
 
 @withRouter
 @Form.create()
@@ -43,6 +44,7 @@ class DetailCategory extends Component {
     })
   }
   setConfigItems = ()=>{
+    const gradeArr = ['一年级','二年级','三年级','四年级','五年级','六年级','初一','初二','初三','高一','高二','高三']
     const {formData} = this.state
     return [
       {
@@ -107,6 +109,30 @@ class DetailCategory extends Component {
         },
         formItem:(
           <Input placeholder='请填写图书类别扩展'></Input>
+        )
+      },
+      {
+        label:"年级",
+        value:"grade",
+        options:{
+          initialValue:formData.grade&&formData.grade.split(','),
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            }
+          ],
+        },
+        formItem:(
+          <Select placeholder='请选择年级' mode='multiple'>
+          {
+            gradeArr.map(v=>(
+              <Option key={v} value={v}>
+                {v}
+              </Option>
+            ))
+          }
+      </Select>
         )
       }
     ]

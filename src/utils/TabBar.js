@@ -1,9 +1,10 @@
 import React from "react"
 import { Menu, Icon } from "antd";
+import userInfo from "../pages/home";
 
 const { SubMenu } = Menu;
 
-export default (routes) => {
+export default (layoutRouteAdministrator,layoutRoute,userInfo) => {
   let foreach = (route) => {
     return (
       <SubMenu
@@ -26,17 +27,32 @@ export default (routes) => {
       </SubMenu>
     );
   };
-
-  return routes.map(route => {
-    if (route.children) {
-      return foreach(route);
-    } else {
-        return (
-            <Menu.Item key={route.key}>
-            <Icon type={route.icon} />
-            <span>{route.name}</span>
-          </Menu.Item>
-        )
-    }
-  });
+  if(userInfo.Administrator==='1'){
+    return layoutRouteAdministrator.map(route => {
+      if (route.children) {
+        return foreach(route);
+      } else {
+          return (
+              <Menu.Item key={route.key}>
+              <Icon type={route.icon} />
+              <span>{route.name}</span>
+            </Menu.Item>
+          )
+      }
+    });
+  }else{
+    return layoutRoute.map(route => {
+      if (route.children) {
+        return foreach(route);
+      } else {
+          return (
+              <Menu.Item key={route.key}>
+              <Icon type={route.icon} />
+              <span>{route.name}</span>
+            </Menu.Item>
+          )
+      }
+    });
+  }
+ 
 };

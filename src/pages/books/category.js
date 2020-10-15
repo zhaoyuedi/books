@@ -89,6 +89,12 @@ class Category extends Component {
         width: 800
       },
       {
+        title: '年级',
+        dataIndex: 'grade',
+        key: 'grade',
+        width: 800
+      },
+      {
         width: 100,
         title: '修改',
         key: 'modification',
@@ -113,7 +119,11 @@ class Category extends Component {
         return
       }
       let parameter = {}
-      parameter[value.type] = value.value
+      if(value.type==='grade'){
+        parameter['q'] =  value.value
+      }else{
+        parameter[value.type] = value.value
+      }
       this.setState({
         parameter
       },()=>{
@@ -154,7 +164,7 @@ class Category extends Component {
       {
         dicCode:'typeExtend',
         dicName:'图书类别扩展'
-      }
+      },
     ]
     return (
       <TableWarp>

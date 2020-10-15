@@ -109,6 +109,13 @@ class BooksListWarp extends Component {
         width: 200
       },
       {
+        title: '年级',
+        dataIndex: 'grade',
+        key: 'grade',
+        width: 200,
+        // render: text => <span>{text.join(',')}</span>
+      },
+      {
         title: '图书描述',
         dataIndex: 'describe',
         key: 'describe',
@@ -139,7 +146,11 @@ class BooksListWarp extends Component {
         return
       }
       let parameter = {}
-      parameter[value.type] = value.value
+      if(value.type==='grade'){
+        parameter['q'] =  value.value
+      }else{
+        parameter[value.type] = value.value
+      }
       this.setState({
         parameter
       },()=>{
@@ -164,6 +175,7 @@ class BooksListWarp extends Component {
     const {
       form: { getFieldDecorator }
     } = this.props
+    const gradeArr = ['一年级','二年级','三年级','四年级','五年级','六年级','初一','初二','初三','高一','高二','高三']
     const type = [
       {
         dicCode:'code',
@@ -197,6 +209,10 @@ class BooksListWarp extends Component {
         dicCode:'describe',
         dicName:'图书描述'
       },
+      {
+        dicCode:'grade',
+        dicName:'年级'
+      }
     ]
     const TypeArr = [
       'IT','农业科学','历史地理','数理科学和化学','文化教育','文学','生物科学','自然科学总论','语言'
@@ -239,6 +255,17 @@ class BooksListWarp extends Component {
                   <Select placeholder='请选择查询条件'>
                       {
                         TypeArr.map(v=>(
+                          <Option key={v} value={v}>
+                            {v}
+                          </Option>
+                        ))
+                      }
+                  </Select>
+                  :
+                  this.props.form.getFieldValue('type')==='grade'?
+                  <Select placeholder='请选择查询条件'>
+                      {
+                        gradeArr.map(v=>(
                           <Option key={v} value={v}>
                             {v}
                           </Option>

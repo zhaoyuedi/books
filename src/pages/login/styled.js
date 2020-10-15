@@ -26,4 +26,15 @@ export const LoginWrapper = styled.div`
             height:50px;
         }
     }
+    .foot{
+        position:fixed;
+        bottom:40px;
+        left:40px;
+        color: red;
+        font-size:22px;
+        cursor: pointer;
+    }
+    .login-form-button{
+        margin-left:50px
+    }
 `

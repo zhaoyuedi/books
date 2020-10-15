@@ -1,7 +1,7 @@
 import {Home,UserList,AddBooks,BooksList,UserInfo,Login,BookDetail,
     Statistics,recommendList,recommendSort,Category,DetailCategory,UserDetail} from '@pages'
 
-export const layoutRoute =[
+export const layoutRouteAdministrator =[
     {
         key:"/home",
         path:"/home",
@@ -85,6 +85,9 @@ export const layoutRoute =[
         ]
     },
 ]
+export const layoutRoute = [
+    
+]
 export const page = [
     {
         key:"/addBook",
@@ -121,4 +124,4 @@ export const login = [
     }
 ]
 
-export const baseconfigRouters = layoutRoute.concat(login).concat(page)
+export const baseconfigRouters = layoutRouteAdministrator.concat(login).concat(page)

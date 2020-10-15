@@ -12,7 +12,8 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      flag: true
+      flag: true,
+      isAdministrator:false
     };
   }
   componentDidMount(){
@@ -73,7 +74,8 @@ class Login extends Component {
         message.info("账号重复，请重新填写");
         return
       }
-      registerHandelr({...values,code:Number(codeNumber.pop().code)+1,registerTime:new Date().getTime(),alterNum:'0'}).then(v=>{
+      const {isAdministrator} = this.state
+      registerHandelr({...values,code:Number(codeNumber.pop().code)+1,registerTime:new Date().getTime(),alterNum:'0',Administrator:isAdministrator?'1':'0'}).then(v=>{
         message.info("注册成功,请登录");
         this.setState({
           flag: true
@@ -84,13 +86,14 @@ class Login extends Component {
   };
   render() {
     const { getFieldDecorator } = this.props.form;
-    const gradeArr = ['研一','研二','研三']
+    const gradeArr = ['一年级','二年级','三年级','四年级','五年级','六年级','初一','初二','初三','高一','高二','高三']
+    const {isAdministrator} = this.state
     return (
       <Fragment>
         <LoginWrapper>
           {this.state.flag ? (
             <Form onSubmit={this.handleSubmit} className="login-form">
-             <Form.Item label='账号' {...{labelCol:{span:4},wrapperCol:{span:20}}}>
+             <Form.Item label={isAdministrator?'管理员账号':'账号'} {...{labelCol:{span:8},wrapperCol:{span:16}}}>
                 {getFieldDecorator("userId", {
                   rules: [
                     { required: true,message:"请正确填写账号"},
@@ -101,11 +104,11 @@ class Login extends Component {
                     prefix={
                       <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
-                    placeholder="账号名称"
+                    placeholder={isAdministrator?"管理员账号名称":"账号名称"}
                   />
                 )}
               </Form.Item>
-              <Form.Item {...{labelCol:{span:4},wrapperCol:{span:20}}} label='密码'>
+              <Form.Item {...{labelCol:{span:8},wrapperCol:{span:16}}} label={isAdministrator?'管理员密码':'密码'}>
                 {getFieldDecorator("password", {
                   rules: [
                     { required: true,message:"请填写密码" },
@@ -117,7 +120,7 @@ class Login extends Component {
                       <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                     }
                     type="password"
-                    placeholder="密码"
+                    placeholder={isAdministrator?"管理员账号密码":"密码"}
                   />
                 )}
               </Form.Item>
@@ -127,7 +130,7 @@ class Login extends Component {
                   htmlType="submit"
                   className="login-form-button"
                 >
-                  登录
+                  {isAdministrator?'管理员登录':'登录'}
                 </Button>
                 <Button
                   type="primary"
@@ -136,7 +139,7 @@ class Login extends Component {
                   style={{ marginLeft: "45px" }}
                   onClick={this.handler.bind(this)}
                 >
-                  立即注册
+                   {isAdministrator?'管理员注册':'立即注册'}
                 </Button>
               </Form.Item>
             </Form>
@@ -255,6 +258,20 @@ class Login extends Component {
               </Form.Item>
             </Form>
           )}
+         {!isAdministrator?<div className='foot' onClick={()=>this.setState({
+            isAdministrator:true
+          })}>
+            <span>
+              管理员登录
+            </span>
+          </div>:
+          <div className='foot' onClick={()=>this.setState({
+            isAdministrator:false
+          })}>
+            <span>
+              用户登录
+            </span>
+          </div>}
         </LoginWrapper>
       </Fragment>
     );

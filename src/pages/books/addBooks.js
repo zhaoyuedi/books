@@ -20,6 +20,7 @@ class AddBooks extends Component {
     const TypeArr = [
       'IT','农业科学','历史地理','数理科学和化学','文化教育','文学','生物科学','自然科学总论','语言'
     ]
+    const gradeArr = ['一年级','二年级','三年级','四年级','五年级','六年级','初一','初二','初三','高一','高二','高三']
     return [
       {
         label:"图书编号",
@@ -140,6 +141,29 @@ class AddBooks extends Component {
         },
         formItem:(
           <Input placeholder='请填写图书总数'></Input>
+        )
+      },
+      {
+        label:"年级",
+        value:"grade",
+        options:{
+          rules: [
+            {
+              required: true,
+              message: '请填写',
+            }
+          ],
+        },
+        formItem:(
+          <Select placeholder='请选择年级' mode='multiple'>
+          {
+            gradeArr.map(v=>(
+              <Option key={v} value={v}>
+                {v}
+              </Option>
+            ))
+          }
+      </Select>
         )
       },
       {
