@@ -93,9 +93,9 @@ class LayoutComponent extends Component {
                       你好,{this.state.userInfo.userName}
                     </div>
                     <div style={{ marginRight: "120px" }}>  <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /></div>
-                    <Dropdown.Button overlay={menu} icon={<Icon type="user" />}>
+                   {userInfo.Administrator==='1'?<Dropdown.Button overlay={menu} icon={<Icon type="user" />}>
                       个人中心
-                    </Dropdown.Button>
+                    </Dropdown.Button>:''}
 
                   </div>
                 </Col>

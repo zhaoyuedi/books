@@ -25,7 +25,7 @@
       "id": "t1L9Kt4",
       "code": "2",
       "registerTime": "1592369729000",
-      "logTime": "1602748226246"
+      "logTime": "1602831891231"
     },
     {
       "userId": "zzz",
@@ -88,9 +88,9 @@
       "type": "IT",
       "press": "科学出版社",
       "amount": "58",
+      "grade": "一年级",
       "describe": "大神养成记",
-      "id": "2",
-      "grade": "一年级,五年级"
+      "id": "2"
     },
     {
       "id": "3",
@@ -234,6 +234,7 @@
       "reason": "技术很到位",
       "time": 1602559889,
       "flagCollect": "1",
+      "grade": "一年级,五年级",
       "score": "4.4"
     },
     {
@@ -244,6 +245,7 @@
       "reason": "学到很多",
       "time": 1602390689,
       "flagCollect": "1",
+      "grade": "一年级,五年级",
       "score": "4"
     },
     {
@@ -254,6 +256,7 @@
       "reason": "很棒",
       "time": 1602390689,
       "flagCollect": "1",
+      "grade": "一年级,五年级",
       "score": "5"
     },
     {
@@ -264,6 +267,7 @@
       "reason": "很全面",
       "time": 1591849889,
       "flagCollect": "0",
+      "grade": "一年级,五年级",
       "score": "4.6"
     },
     {
@@ -274,6 +278,7 @@
       "reason": "讲的很彻底",
       "time": 1592195489,
       "flagCollect": "1",
+      "grade": "一年级,五年级",
       "score": "4.8"
     },
     {
@@ -284,6 +289,7 @@
       "reason": "知识点全面",
       "time": 1602559889,
       "flagCollect": "1",
+      "grade": "一年级,五年级",
       "score": "3.9"
     },
     {
@@ -294,6 +300,7 @@
       "reason": "学到很多东西",
       "time": 1592195669,
       "flagCollect": "1",
+      "grade": "一年级,五年级",
       "score": "4.6"
     },
     {
@@ -304,6 +311,7 @@
       "reason": "真才实学",
       "time": 1592369729,
       "flagCollect": "1",
+      "grade": "一年级,五年级",
       "score": "4.8"
     },
     {
@@ -314,6 +322,7 @@
       "reason": "通俗易懂，值得推荐",
       "time": 1592369729,
       "flagCollect": "1",
+      "grade": "一年级,五年级",
       "score": "4.9"
     }
   ],
@@ -323,7 +332,7 @@
       "typeName": "哲学宗教",
       "signboard": "哲学宗教",
       "typeExtend": "哲学宗教",
-      "grade": "一年级,五年级",
+      "grade": "一年级,二年级,五年级",
       "id": "0"
     },
     {
@@ -445,6 +454,44 @@
       "grade": "二年级",
       "typeExtend": "中国本土文化",
       "id": "aCypfsN"
+    }
+  ],
+  "CardList":[
+    {
+      "id":"1",
+      "title":"小学语文教材全科",
+      "grade": "三年级",
+      "author":"王晓"
+    },
+    {
+      "id":"2",
+      "title":"小学语文教材全科",
+      "grade": "三年级",
+      "author":"王晓"
+    },
+    {
+      "id":"3",
+      "title":"小学语文教材全科",
+      "grade": "三年级",
+      "author":"王晓"
+    },
+    {
+      "id":"4",
+      "title":"小学语文教材全科",
+      "grade": "三年级",
+      "author":"王晓"
+    },
+    {
+      "id":"5",
+      "title":"小学语文教材全科",
+      "grade": "三年级",
+      "author":"王晓"
+    },
+    {
+      "id":"6",
+      "title":"小学语文教材全科",
+      "grade": "三年级",
+      "author":"王晓"
     }
   ]
 }

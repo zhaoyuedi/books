@@ -109,7 +109,7 @@ class BooksListWarp extends Component {
         width: 200
       },
       {
-        title: '年级',
+        title: '图书适应年级',
         dataIndex: 'grade',
         key: 'grade',
         width: 200,
@@ -211,7 +211,7 @@ class BooksListWarp extends Component {
       },
       {
         dicCode:'grade',
-        dicName:'年级'
+        dicName:'图书适应年级'
       }
     ]
     const TypeArr = [

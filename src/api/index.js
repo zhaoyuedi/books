@@ -50,3 +50,4 @@ export const modificationCategoryHandler = (id,data)=>http.put(`http://localhost
 export const addCategory = (data)=>http.post('http://localhost:3000/category',data)
 export const modificationUserHandler = (id,data)=>http.put(`http://localhost:3000/user/${id}`,data)
 export const deleteUserHandler = (id,data)=>http.Delete(`http://localhost:3000/user/${id}`,data)
+export const getCardList = (params)=>http.get('http://localhost:3000/CardList',params)

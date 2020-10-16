@@ -93,6 +93,12 @@ class RecommendList extends Component {
         width: 200
       },
       {
+        title: '图书适应年级',
+        dataIndex: 'grade',
+        key: 'grade',
+        width: 200
+      },
+      {
         title: '评分',
         dataIndex: 'score',
         key: 'score',

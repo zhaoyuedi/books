@@ -144,7 +144,7 @@ class AddBooks extends Component {
         )
       },
       {
-        label:"年级",
+        label:"图书适应年级",
         value:"grade",
         options:{
           rules: [

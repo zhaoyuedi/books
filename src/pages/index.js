@@ -53,3 +53,11 @@ export const recommendSort = ReactLoad({
     loader:()=>import('./recommend/recommendSort'),
     loading:Loading
 })
+export const UserHome = ReactLoad({
+    loader:()=>import('./UserHome'),
+    loading:Loading
+})
+export const BooksUserDetail = ReactLoad({
+    loader:()=>import('./UserHome/detail'),
+    loading:Loading
+})

@@ -168,7 +168,7 @@ class Detail extends Component {
         )
       },
       {
-        label:"年级",
+        label:"图书适应年级",
         value:"grade",
         options:{
           initialValue:formData.grade&&formData.grade.split(','),

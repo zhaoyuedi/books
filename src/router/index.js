@@ -1,5 +1,5 @@
 import {Home,UserList,AddBooks,BooksList,UserInfo,Login,BookDetail,
-    Statistics,recommendList,recommendSort,Category,DetailCategory,UserDetail} from '@pages'
+    Statistics,recommendList,recommendSort,Category,DetailCategory,UserDetail,UserHome,BooksUserDetail} from '@pages'
 
 export const layoutRouteAdministrator =[
     {
@@ -86,7 +86,13 @@ export const layoutRouteAdministrator =[
     },
 ]
 export const layoutRoute = [
-    
+    {
+        key:"/users/home",
+        path:"/users/home",
+        component:UserHome,
+        icon:"home",
+        name:"首页"
+    },
 ]
 export const page = [
     {
@@ -112,6 +118,12 @@ export const page = [
         path:"/userList/detail/:id?",
         component:UserDetail,
         name:"新增用户"
+    },
+    {
+        key:"/booksUser/detail/:id",
+        path:"/booksUser/detail/:id",
+        component:BooksUserDetail,
+        name:"新增用户"
     }
 ]
 export const login = [
@@ -124,4 +136,4 @@ export const login = [
     }
 ]
 
-export const baseconfigRouters = layoutRouteAdministrator.concat(login).concat(page)
+export const baseconfigRouters = layoutRouteAdministrator.concat(login).concat(page).concat(layoutRoute)

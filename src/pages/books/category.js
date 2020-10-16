@@ -148,6 +148,7 @@ class Category extends Component {
     const {
       form: { getFieldDecorator }
     } = this.props
+    const gradeArr = ['一年级','二年级','三年级','四年级','五年级','六年级','初一','初二','初三','高一','高二','高三']
     const type = [
       {
         dicCode:'typeNumber',
@@ -165,6 +166,10 @@ class Category extends Component {
         dicCode:'typeExtend',
         dicName:'图书类别扩展'
       },
+      {
+        dicCode:'grade',
+        dicName:'年级'
+      }
     ]
     return (
       <TableWarp>
@@ -200,6 +205,17 @@ class Category extends Component {
                 getFieldDecorator(
                   'value'
                 )(
+                  this.props.form.getFieldValue('type')==='grade'?
+                  <Select placeholder='请选择查询条件'>
+                      {
+                        gradeArr.map(v=>(
+                          <Option key={v} value={v}>
+                            {v}
+                          </Option>
+                        ))
+                      }
+                  </Select>
+                  :
                   <Input placeholder='请输入查询条件' onFocus={this.onFocus}/>
                 )
               }

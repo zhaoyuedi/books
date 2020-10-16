@@ -28,7 +28,7 @@ class DetailCategory extends Component {
             if(err){
               return
             }
-            modificationCategoryHandler(this.props.match.params.id,value).then(()=>{
+            modificationCategoryHandler(this.props.match.params.id,{...value,grade:value.grade.join(',')}).then(()=>{
               message.success('修改成功')
             })
         })
@@ -112,7 +112,7 @@ class DetailCategory extends Component {
         )
       },
       {
-        label:"年级",
+        label:"图书适应年级",
         value:"grade",
         options:{
           initialValue:formData.grade&&formData.grade.split(','),
